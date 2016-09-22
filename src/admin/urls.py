@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from scheduler_op import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^forms/', views.upload_file, name='form'),
+    url(r'^$',views.index, name='index'),
+    url(r'^success/url/', views.success, name='success'),
+    url(r'^list/$', views.list, name='list'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -23,10 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-y*im9!+^lp)m$q5@#z*!zn&f+7+&&kdty1=1ss(teixn$ssv*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1:8000"]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'scheduler_op/media')
+MEDIA_URL = '/media/'
 
 # Application definition
 
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'scheduler_op/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -66,7 +68,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-        'FORM' : "scheduler_op/templates"
     },
 ]
 
@@ -80,6 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
