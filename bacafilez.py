@@ -1,30 +1,5 @@
 # urutan: hitungbaris(), bacakata(), convert meggnkan strtoxx()
-# nama file testcase : 'masukan.txt'
-
-# x, angka dalam str('0'-'9')
-# return, angka dalam int(0-9)
-def hrftoint(x):
-    if x == '0':
-        return 0
-    elif x == '1':
-        return 1
-    elif x == '2':
-        return 2
-    elif x == '3':
-        return 3
-    elif x == '4':
-        return 4
-    elif x == '5':
-        return 5
-    elif x == '6':
-        return 6
-    elif x == '7':
-        return 7
-    elif x == '8':
-        return 8
-    elif x == '9':
-        return 9
-            
+# nama file testcase : 'masukan.txt'            
 class Bacafile:
     # nf, nama file .txt masukan yg berada di saru direktori
     # return, jumlah baris dalam satu file .txt(dihitung jml \n + 1)
@@ -44,7 +19,11 @@ class Bacafile:
     # return, satu 'kata' dari file txt
     def bacakata(self, f):
         kata = ''
+        i = 0
         r = f.read(1)
+        while (r==';') or (r=='\n') or (r==' '):
+            r = f.read(1)
+            #print(r)
         while (r!=';') and (r!='\n') and (r!='') and (r!=' '):
             kata+=r
             r = f.read(1)
@@ -56,10 +35,7 @@ class Bacafile:
     # return, int hasil convert
  
     def strtojam(self, s):
-        if s[0] == '0':             # jam 0j
-            return int(s[1])
-        else:                       
-            return int(s[0])+ 10
+        return int(s[0])*10 + int(s[1])
 
     # s, str yg menunjukkan hari(ada ','-nya)
     #    yg dibaca hanya angka satuan, yg lain diabaikan
@@ -83,3 +59,6 @@ print(b.hitungbaris("Testcase.txt"))
 f = open("Testcase.txt", 'r')
 for ii in range(30):
     print(b.bacakata(f, len(r))) """
+
+b = Bacafile()
+s = "neko;is;dead"
