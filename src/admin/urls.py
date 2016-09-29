@@ -21,8 +21,5 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^forms/', views.upload_file, name='form'),
-    url(r'^$',views.index, name='index'),
-    url(r'^success/url/', views.success, name='success'),
-    url(r'^list/$', views.list, name='list'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^$',views.list, name='list'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

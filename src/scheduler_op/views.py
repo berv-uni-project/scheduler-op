@@ -23,13 +23,6 @@ def upload_file(request):
 
     return render(request, 'upload.html', {'form': form})
 
-
-def index(request):
-    return render(request,'index.html', {'index':index})
-
-def success(request):
-    return render(request,'loading.html', {'success':success})
-
 def list(request):
     # Handle file upload
     if request.method == 'POST':
