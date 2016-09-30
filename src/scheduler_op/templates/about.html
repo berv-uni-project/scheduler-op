@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Scheduler OP</title>
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="{% static 'js/html5shiv.js' %}"></script>
+        <script src="{% static 'js/respond.min.js' %}"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico'%}">
+
+        <style>
+            h2 {
+                border-bottom: 3px solid;
+                line-height: 1.75em;
+                padding-bottom: 8px;
+                text-align: center;
+                width: 100%;
+            }
+
+            form.upload-file {
+                margin: 0 auto;
+                width: 200px;
+            }
+
+            li.list-file {
+                text-align:center;
+            }
+
+            p.list-file {
+                text-align:center;
+            }
+
+            img.logo {
+                width: 198px;
+                height: 42px;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                    <li class="active"><a href="about-us/">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header><!--/header-->
+
+        <section id="about-us" class="container">
+            <h1 class="center">Meet the Team</h1>
+            <p class="lead center">This web application created by : </p>
+            <div class="gap"></div>
+            <div id="meet-the-team" class="row">
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img id="amir" class="img-responsive img-thumbnail img-circle" src="{% static 'images/amir-135.jpg' %}" alt="" ></p>
+                    <h5>Amir<small class="designation muted">13514017</small></h5>
+                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/jeje-135.jpg' %}" alt="" ></p>
+                    <h5>Jeremia Jason Lasiman<small class="designation muted">13514021</small></h5>
+                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/bervi-135.jpg' %}" alt="" ></p>
+                    <h5>Bervianto Leo Pratama<small class="designation muted">13514047</small></h5>
+                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/richard-135.jpg' %}" alt="" ></p>
+                    <h5>Richard Wellianto<small class="designation muted">13514051</small></h5>
+                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/zahid-135.jpg' %}" alt="" ></p>
+                    <h5>M. Az-zahid Adhitya Silparensi<small class="designation muted">13514095</small></h5>
+                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+
+</html>

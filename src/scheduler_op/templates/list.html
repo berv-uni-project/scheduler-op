@@ -16,6 +16,35 @@
         <script src="{% static 'js/respond.min.js' %}"></script>
         <![endif]-->
         <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico'%}">
+
+        <style>
+            h2 {
+                border-bottom: 3px solid;
+                line-height: 1.75em;
+                padding-bottom: 8px;
+                text-align: center;
+                width: 100%;
+            }
+
+            form.upload-file {
+                margin: 0 auto;
+                width: 200px;
+            }
+
+            li.list-file {
+                text-align:center;
+            }
+
+            p.list-file {
+                text-align:center;
+            }
+
+            img.logo {
+                width: 198px;
+                height: 42px;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -28,12 +57,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+                <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="about-us/">About Us</a></li>
                 </ul>
             </div>
         </div>
@@ -42,19 +71,20 @@
         <section id="recent-works">
             <div class="container">
         <!-- List of uploaded documents -->
-        <h2>List File</h2>
+        <h2 class="wisteria">Recently Uploaded Files</h2>
         {% if documents %}
             <ul>
                 {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                    <li class="list-file"><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No documents.</p>
+            <p class="list-file">No documents.</p>
         {% endif %}
 
+        <h2 class="peter-river">Input Your File To Bottom</h2>
         <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+        <form class="upload-file" action="{% url "list" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
 
