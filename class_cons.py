@@ -1,17 +1,41 @@
 import sys
-from bacafilez import * #agar bisa mengambil data
+from bacafilez import *  # agar bisa mengambil data
+
+def getrange(s1,s2,e1,e2):
+    range = []
+    if(s1 > s2):
+        range.append(s1)
+    else:
+        range.append(s2)
+    if(e1 > e2):
+        range.append(e2)
+    else:
+        range.append(e1)
+    return range
 
 class day_bool:
     def __init__(self, validday):
-        self.day = [False]*6
+        self.day = [False] * 6
         for char in validday:
             self.day[int(char)] = True
-          #  print(self.day[int(char)], char)
+            #  print(self.day[int(char)], char)
+
     def __str__(self):
-        A = "1 : "+str(self.day[1]) + " 2 : "+str(self.day[2])+" 3 : "+\
-        str(self.day[3])+ " 4 : "+str(self.day[4])+" 5 : "+\
-        str(self.day[5])
+        A = "1 : " + str(self.day[1]) + " 2 : " + str(self.day[2]) + " 3 : " + \
+            str(self.day[3]) + " 4 : " + str(self.day[4]) + " 5 : " + \
+            str(self.day[5])
         return A
+
+    def checksameday(self, self2):
+        r = []
+        for i in [1, 2, 3, 4, 5]:
+            if self.day[i] and self2.day[i]:
+                r.append(i)
+        return r
+    def ifsameday(self, self2):
+        for i in [1, 2, 3, 4, 5]:
+            if self.day[i] and self2.day[i]:
+                return True
 
 class room:
     def __init__(self, rid, start, end, vday):
@@ -19,22 +43,22 @@ class room:
         self.start = start
         self.end = end
         self.validday = vday
+
     def __str__(self):
-        A = self.room_id +"\n"+ str(self.start)+"\n"+ str(self.end)+"\n"+\
-        str(self.validday)
+        A = self.room_id + "\n" + str(self.start) + "\n" + str(self.end) + "\n" + \
+            str(self.validday)
         return A
 
 
 class allroom:
-    def __init__(self, filename,b):
-        f = open(filename,'r')
+    def __init__(self, filename, b):
+        f = open(filename, 'r')
         temp = b.bacakata(f)
         self.roomlist = []
-       # e,s,v = ""
-        while(temp != "Ruangan" and temp != ""):
+        while (temp != "Ruangan" and temp != ""):
             temp = b.bacakata(f)
         temp = b.bacakata(f)
-        while(temp != "Jadwal" and temp !=""):
+        while (temp != "Jadwal" and temp != ""):
             r_id = temp;
             start = b.strtojam(b.bacakata(f))
             end = b.strtojam(b.bacakata(f))
@@ -43,36 +67,38 @@ class allroom:
             x = room(r_id, start, end, vday)
             (self.roomlist).append(x)
             temp = b.bacakata(f)
+
     def __str__(self):
         A = ""
         for a in self.roomlist:
-            A = A+str(a)+"\n"
+            A = A + str(a) + "\n"
         return A
-            
-        
+
 
 class course:
-    def __init__(self, courseid, r_cons, start, end, sks,validday):
+    def __init__(self, courseid, r_cons, start, end, sks, validday):
         self.courseid = courseid
         self.room_cons = r_cons
-        self.start =start
+        self.start = start
         self.end = end
         self.sks = sks
         self.validday = validday
+
     def __str__(self):
-        A = self.courseid +"\n"+ self.room_cons +"\n"+str(self.start)+"\n"+ str(self.end)+"\n"+\
-        str(self.validday)
+        A = self.courseid + "\n" + self.room_cons + "\n" + str(self.start) + "\n" + str(self.end) + "\n" + \
+            str(self.validday)
         return A
-		
-class allcourse: #kelas kuliah yang untuk konstrain kuliah
-    def __init__(self,filename,b):
+
+
+class allcourse:  # kelas kuliah yang untuk konstrain kuliah
+    def __init__(self, filename, b):
         f = open(filename, 'r')
         self.courselist = []
         temp = b.bacakata(f)
-        while(temp != "Jadwal" and temp != ""):
+        while (temp != "Jadwal" and temp != ""):
             temp = b.bacakata(f)
         temp = b.bacakata(f)
-        while(temp != "Ruangan" and temp != ""):
+        while (temp != "Ruangan" and temp != ""):
             courseid = temp;
             r_cons = b.bacakata(f)
             start = b.strtojam(b.bacakata(f))
@@ -83,19 +109,17 @@ class allcourse: #kelas kuliah yang untuk konstrain kuliah
             x = course(courseid, r_cons, start, end, sks, vday)
             (self.courselist).append(x)
             temp = b.bacakata(f)
+
     def __str__(self):
         A = ""
         for a in self.courselist:
-            A = A+str(a)+"\n"
+            A = A + str(a) + "\n"
         return A
 
-			
-			
-
-#Test
+"""
+# Test
 b = Bacafile()
 c = allcourse("Testcase.txt", b)
 a = allroom("Testcase.txt", b)
 print(a)
-print(c)
-		
+print(c)"""
