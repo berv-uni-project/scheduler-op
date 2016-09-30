@@ -94,7 +94,12 @@
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
             </p>
+            <p>{{ form.radiobutton.label_tag }} </p>
+            {% for radio in form.radiobutton %}
 
+            <input name="{{ radio.name }}" type="radio" id="radio_{{ radio.index }}" value={{ radio.choice_value }}>
+            <label for="radio_{{ radio.index }}">{{ radio.choice_label }}</label> <br>
+            {% endfor %}
             <p><input class="btn btn-primary btn-lg" type="submit" value="Upload"/></p>
         </form>
             </div>

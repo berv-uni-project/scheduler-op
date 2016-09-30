@@ -12,9 +12,9 @@ def list(request):
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
-
+            methode = form.cleaned_data['radiobutton']
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('list'))
+            return HttpResponseRedirect('/load/?methode='+methode)
     else:
         form = UploadFileForm()  # A empty, unbound form
 
@@ -30,3 +30,8 @@ def list(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def loading(request):
+    document = Document.objects.all().last();
+    methode = request.GET.get('methode')
+    return render(request, 'run.html', {'document':document, 'methode':methode})
