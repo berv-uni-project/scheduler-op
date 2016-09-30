@@ -5,24 +5,6 @@ from django.core.urlresolvers import reverse
 from .forms import UploadFileForm
 from .models import Document
 
-def upload_file(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = UploadFileForm(request.POST, request.FILES)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/success/url/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = UploadFileForm()
-
-    return render(request, 'upload.html', {'form': form})
-
 def list(request):
     # Handle file upload
     if request.method == 'POST':
@@ -45,3 +27,6 @@ def list(request):
         'list.html',
         {'documents': documents, 'form': form}
     )
+
+def about(request):
+    return render(request, 'about.html')
