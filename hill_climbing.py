@@ -28,7 +28,7 @@ def initialize(coursel, rooml):
                     day = d[0]
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
-                end = start + co.sks - 1
+                end = start + co.sks
                 var = CSPvar(co.courseid, start, end, day, R[i].room_id)
                # print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
@@ -51,7 +51,7 @@ def initialize(coursel, rooml):
                         day = d[0]
                     r = getrange(R.start, co.start, R.end, co.end)
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
-                    end = start + co.sks - 1
+                    end = start + co.sks
                     # print(R.room_id)
                     var = CSPvar(co.courseid, start, end, day, R.room_id)
                     #print(var.course, var.start, var.end, var.day, var.room)
@@ -212,8 +212,8 @@ class hillclimbing:
             
 #main test
 b = Bacafile()
-c = allcourse("Testcase.txt", b)
-a = allroom("Testcase.txt", b)
+c = allcourse("doc/Testcase.txt", b)
+a = allroom("doc/Testcase.txt", b)
 #print(a)
 #print(c)
 X = hillclimbing(c, a)
