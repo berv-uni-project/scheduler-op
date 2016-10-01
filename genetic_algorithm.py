@@ -156,7 +156,6 @@ class genetic_algorithm:
         for v in self.all_strings[self.idx]:
             print(v)
         print(str(gettotalconflictpersks(self.all_strings[self.idx])))
-        print("mau lanjut? jika tidak pencet 'n'")
 
 
 #main test
