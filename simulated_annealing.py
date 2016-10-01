@@ -59,7 +59,7 @@ class simulated_annealing :
 
         for v in self.var:
             print(v)
-        print(str(gettotalconflict(self.var)))
+        print(str(gettotalconflictpersks(self.var)))
 
 #main test
 b = Bacafile()
@@ -67,5 +67,5 @@ c = allcourse("doc/Testcase.txt", b)
 a = allroom("doc/Testcase.txt", b)
 #print(a)
 #print(c)
-X = simulated_annealing(c, a, 0.9)
+X = simulated_annealing(c, a, 1)
 X.simulate()

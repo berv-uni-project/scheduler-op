@@ -8,7 +8,6 @@ class ActionClass:
         self.numcon = con
         self.change = var
 
-
 def initialize(coursel, rooml):
     ran = random
     X = []
@@ -31,7 +30,7 @@ def initialize(coursel, rooml):
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
                 end = start + co.sks
                 var = CSPvar(co.courseid, start, end, day, R[i].room_id)
-               # print(var.course, var.start, var.end, var.day, var.room)
+                #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
         else:
             R = None
@@ -55,7 +54,7 @@ def initialize(coursel, rooml):
                     end = start + co.sks
                     # print(R.room_id)
                     var = CSPvar(co.courseid, start, end, day, R.room_id)
-                    #print(var.course, var.start, var.end, var.day, var.room)
+                    #print('else', var.course, var.start, var.end, var.day, var.room)
                     X.append(var)
     return X
     
@@ -115,6 +114,20 @@ def gettotalconflict(var):
         i += 1
     return sum
 
+def gettotalconflictpersks(var):
+    sum = 0
+    i = 0
+    while i < len(var):
+        j = i + 1
+        while j < len(var):
+            nconflict = var[i].conflictcheckpersks(var[j])
+            if (nconflict > 0):
+                print("konflik antara ", var[i].course, ' dan ', var[j].course )
+                sum += nconflict
+            j += 1
+        i += 1
+    return sum
+
 
 class CSPvar (object) :
     def __init__(self, course, start, end, day, room):
@@ -138,6 +151,23 @@ class CSPvar (object) :
                     return False
             else:
                 return False
+
+    def conflictcheckpersks (self, cspvar2) :
+        if type(cspvar2) is CSPvar:
+            if self.room == cspvar2.room :
+                if self.day == cspvar2.day :
+                    if ((self.start >= cspvar2.start) and (self.start<=cspvar2.end)):
+                        #print('masuk 1 end', cspvar2.end, ' start ', self.start, ' jadi ', cspvar2.end - self.start + 1)
+                        return cspvar2.end - self.start + 1
+                    elif((cspvar2.start >= self.start) and (cspvar2.start <= self.end)) :
+                        #print('masuk 2 end', self.end, ' start ', cspvar2.start, ' jadi ', self.end - cspvar2.start + 1)
+                        return self.end - cspvar2.start + 1
+                    else:
+                        return 0
+                else:
+                    return 0
+            else:
+                return 0
     #@property
     def __str__(self):
        # assert isinstance(self.room, object)
@@ -192,10 +222,10 @@ class hillclimbing:
                 if act.change.numcon<min:
                     min = act.change.numcon
                     idx = j
-                j+=1
+                j += 1
             i = 0
             while self.var[i].course!=self.action[idx].change.course:
-                i+=1
+                i += 1
             self.var[i].start = self.action[idx].change.start
             self.var[i].end = self.action[idx].change.end
             self.var[i].day = self.action[idx].change.day
@@ -203,26 +233,21 @@ class hillclimbing:
             count = count+1
         for v in self.var:
             print(v)
-        print(str(gettotalconflict(self.var)))
+        print(str(gettotalconflictpersks(self.var)))
 
 
 
 
 
-
-            
+"""
 #main test
 b = Bacafile()
 c = allcourse("doc/Testcase.txt", b)
 a = allroom("doc/Testcase.txt", b)
 #print(a)
 #print(c)
+#var = initialize(c, a)
 X = hillclimbing(c, a)
 X.start()
+"""
 
-            
-        
-                   
-                    
-                    
-                    
