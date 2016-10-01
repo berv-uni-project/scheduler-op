@@ -73,6 +73,19 @@ class allroom:
         for a in self.roomlist:
             A = A + str(a) + "\n"
         return A
+    
+    def getvalidroom(self, co):
+        R=[]
+        for room in self.roomlist:
+                if (not room.validday.ifsameday(co.validday)):
+                    continue
+                else:
+                    r = getrange(room.start, co.start, room.end, co.end)
+                    if (co.sks >= r[1] - r[0] + 1):
+                        continue
+                    else:
+                        R.append(room)
+        return R
 
 
 class course:
