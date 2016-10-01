@@ -1,6 +1,3 @@
-import sys
-from bacafilez import *  # agar bisa mengambil data
-
 def getrange(s1,s2,e1,e2):
     range = []
     if(s1 > s2):

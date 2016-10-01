@@ -35,3 +35,6 @@ def loading(request):
     document = Document.objects.all().last();
     methode = request.GET.get('methode')
     return render(request, 'run.html', {'document':document, 'methode':methode})
+
+def result(request):
+    return render(request,'result.html');

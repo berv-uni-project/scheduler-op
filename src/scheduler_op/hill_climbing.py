@@ -1,6 +1,7 @@
 import random
-import sys
-from class_cons import *
+
+from scheduler_op.class_cons import *
+
 
 class ActionClass:
     def __init__(self, con, var):
