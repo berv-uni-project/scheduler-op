@@ -21,7 +21,6 @@ class day_bool:
         A = "1 : " + str(self.day[1]) + " 2 : " + str(self.day[2]) + " 3 : " + \
             str(self.day[3]) + " 4 : " + str(self.day[4]) + " 5 : " + \
             str(self.day[5])
-        return A
 
     def checksameday(self, self2):
         r = []
@@ -86,7 +85,8 @@ class allroom:
 
 
 class course:
-    def __init__(self, courseid, r_cons, start, end, sks, validday):
+    def __init__(self, id, courseid, r_cons, start, end, sks, validday):
+        self.id = id
         self.courseid = courseid
         self.room_cons = r_cons
         self.start = start
@@ -102,6 +102,7 @@ class course:
 
 class allcourse:  # kelas kuliah yang untuk konstrain kuliah
     def __init__(self, filename, b):
+        id = 0
         f = open(filename, 'r')
         self.courselist = []
         temp = b.bacakata(f)
@@ -116,8 +117,9 @@ class allcourse:  # kelas kuliah yang untuk konstrain kuliah
             sks = int(b.bacakata(f))
             temp = b.strtohari(b.bacakata(f))
             vday = day_bool(temp)
-            x = course(courseid, r_cons, start, end, sks, vday)
+            x = course(id, courseid, r_cons, start, end, sks, vday)
             (self.courselist).append(x)
+            id += 1
             temp = b.bacakata(f)
 
     def __str__(self):

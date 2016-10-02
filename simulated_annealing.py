@@ -32,7 +32,7 @@ class simulated_annealing :
         for act in self.action:
             var_temp = CSPvarlist(self.var)
             i = 0
-            while var_temp.var[i].course != act.change.course:
+            while var_temp.var[i].id != act.change.id:
                 i+=1
             var_temp.var[i].start = act.change.start
             var_temp.var[i].end = act.change.end
@@ -46,7 +46,7 @@ class simulated_annealing :
                 idx = j
             j += 1
             k = 0
-            while self.var[k].course!=self.action[idx].change.course:
+            while self.var[k].id!=self.action[idx].change.id:
                 k += 1
             self.var[k].start = self.action[idx].change.start
             self.var[k].end = self.action[idx].change.end

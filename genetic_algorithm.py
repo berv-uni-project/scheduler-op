@@ -7,6 +7,7 @@ class genetic_algorithm:
         self.str_fitness = []
         self.coursel = coursel
         self.rooml = rooml
+        self.action = getallaction(coursel, rooml)
         self.idx = 0
         i = 0
         while i < nString:
@@ -50,43 +51,6 @@ class genetic_algorithm:
             i += 1
         return i - 1
 
-    def getvarchange(self ,coursel, rooml):
-        ran = random.randrange(0, len(coursel.courselist[0].courseid) - 1)
-        co = coursel.courselist[ran]
-        if co.room_cons == '-':
-            R = rooml.getvalidroom(co)
-            for room in R:
-                c = co.courseid
-                ro = room.room_id
-                dayl = co.validday.checksameday(room.validday)
-                for day in dayl:
-                    d = day
-                    r = getrange(room.start, co.start, room.end, co.end)
-                    begin = r[0]
-                    end = r[1] - co.sks + 1
-                    for i in range(begin, end + 1):
-                        s = i
-                        e = i + co.sks - 1
-                        var = CSPvar(c, s, e, d, ro)
-        else:
-            R = None
-            for room in rooml.roomlist:
-                if room.room_id == co.room_cons:
-                    R = room
-                    break
-            c = co.courseid
-            ro = co.room_cons
-            dayl = co.validday.checksameday(R.validday)
-            for day in dayl:
-                d = day
-                r = getrange(R.start, co.start, R.end, co.end)
-                begin = r[0]
-                end = r[1] - co.sks + 1
-                for i in range(begin, end + 1):
-                    s = i
-                    e = i + co.sks - 1
-                    var = CSPvar(c, s, e, d, ro)
-        return var
 
     def mutation(self, index):
         #I.S string dengan index tersebut akan diambil set of variabelnya
@@ -95,25 +59,28 @@ class genetic_algorithm:
         ran = random.randrange(0,len(self.all_strings[index]) - 1)
         endloop = False
         loop = 0
+        ran = random
         while (endloop == False):
-            vary = self.getvarchange(self.coursel, self.rooml)
+            vary = self.action[loop]
+            print('masuk mutasi, loop ', loop)
             var_temp = CSPvarlist(self.all_strings[index])
             i = 0
-            while var_temp.var[i].course != vary.course:
+            while var_temp.var[i].id != vary.change.id:
                 i += 1
-            var_temp.var[i].start = vary.start
-            var_temp.var[i].end = vary.end
-            var_temp.var[i].day = vary.day
-            var_temp.var[i].room = vary.room
+            var_temp.var[i].start = vary.change.start
+            var_temp.var[i].end = vary.change.end
+            var_temp.var[i].day = vary.change.day
+            var_temp.var[i].room = vary.change.room
             vary.numcon = gettotalconflict(var_temp.var)
-            if (gettotalconflict(var_temp.var) < gettotalconflict(self.all_strings[index])) or (loop >= 4):
+            if (gettotalconflict(var_temp.var) < gettotalconflict(self.all_strings[index])) or \
+                    (loop >= len(self.action) - 2):
                 k = 0
-                while self.all_strings[index][k].course != vary.course:
+                while self.all_strings[index][k].id!= vary.change.id:
                     k += 1
-                self.all_strings[index][k].start = vary.start
-                self.all_strings[index][k].end = vary.end
-                self.all_strings[index][k].day = vary.day
-                self.all_strings[index][k].room = vary.room
+                self.all_strings[index][k].start = vary.change.start
+                self.all_strings[index][k].end = vary.change.end
+                self.all_strings[index][k].day = vary.change.day
+                self.all_strings[index][k].room = vary.change.room
                 endloop = True
             loop += 1
 
@@ -166,6 +133,4 @@ a = allroom("doc/Testcase.txt", b)
 #print(c)
 X = genetic_algorithm(c, a, 4)
 X.genetic_start()
-
-
 

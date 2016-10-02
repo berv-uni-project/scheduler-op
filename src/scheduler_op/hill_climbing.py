@@ -27,7 +27,7 @@ def initialize(coursel, rooml):
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
                 end = start + co.sks
-                var = CSPvar(co.courseid, start, end, day, R[i].room_id)
+                var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id)
                 #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
         else:
@@ -51,7 +51,7 @@ def initialize(coursel, rooml):
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
                     end = start + co.sks
                     # print(R.room_id)
-                    var = CSPvar(co.courseid, start, end, day, R.room_id)
+                    var = CSPvar(co.id, co.courseid, start, end, day, R.room_id)
                     #print('else', var.course, var.start, var.end, var.day, var.room)
                     X.append(var)
     return X
@@ -73,7 +73,7 @@ def getallaction (coursel, rooml):
                     for i in range(begin, end+1):
                         s = i
                         e = i+co.sks-1
-                        var = CSPvar(c,s,e,d,ro)
+                        var = CSPvar(co.id, c,s,e,d,ro)
                         act = ActionClass(999,var)
                         action.append(act)
         else:
@@ -95,7 +95,7 @@ def getallaction (coursel, rooml):
                     for i in range(begin,end+1):
                         s = i
                         e = i+co.sks-1
-                        var = CSPvar(c, s, e, d, ro)
+                        var = CSPvar(co.id, c, s, e, d, ro)
                         act = ActionClass(999,var)
                         action.append(act)
     return action
@@ -128,7 +128,8 @@ def gettotalconflictpersks(var):
 
 
 class CSPvar (object) :
-    def __init__(self, course, start, end, day, room):
+    def __init__(self, id, course, start, end, day, room):
+        self.id = id
         self.course = course
         self.start = start
         self.end = end
@@ -183,7 +184,7 @@ class CSPvarlist:
     def __init__(self, varlist):
         self.var = []
         for el in varlist:
-            var = CSPvar(el.course, el.start, el.end, el.day, el.room)
+            var = CSPvar(el.id, el.course, el.start, el.end, el.day, el.room)
             self.var.append(var)
 
 class hillclimbing:
@@ -210,7 +211,7 @@ class hillclimbing:
             for act in self.action:
                 var_temp = CSPvarlist(self.var)
                 i = 0
-                while var_temp.var[i].course != act.change.course:
+                while var_temp.var[i].id!= act.change.id:
                     i+=1
                 var_temp.var[i].start = act.change.start
                 var_temp.var[i].end = act.change.end
@@ -222,7 +223,7 @@ class hillclimbing:
                     idx = j
                 j += 1
             i = 0
-            while self.var[i].course!=self.action[idx].change.course:
+            while self.var[i].id!=self.action[idx].change.id:
                 i += 1
             self.var[i].start = self.action[idx].change.start
             self.var[i].end = self.action[idx].change.end
