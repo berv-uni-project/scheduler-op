@@ -1,4 +1,4 @@
-from hill_climbing import *
+from scheduler_op.hill_climbing import *
 import random
 
 class genetic_algorithm:
@@ -124,7 +124,7 @@ class genetic_algorithm:
             print(v)
         print(str(gettotalconflictpersks(self.all_strings[self.idx])))
 
-
+"""
 #main test
 b = Bacafile()
 c = allcourse("doc/Testcase.txt", b)
@@ -133,4 +133,4 @@ a = allroom("doc/Testcase.txt", b)
 #print(c)
 X = genetic_algorithm(c, a, 4)
 X.genetic_start()
-
+"""

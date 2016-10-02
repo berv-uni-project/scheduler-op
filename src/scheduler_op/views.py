@@ -7,6 +7,8 @@ import platform
 from .forms import UploadFileForm
 from .models import Document
 from scheduler_op.hill_climbing import *
+from scheduler_op.simulated_annealing import *
+from scheduler_op.genetic_algorithm import *
 from scheduler_op.bacafilez import *
 from scheduler_op.class_cons import *
 
@@ -57,10 +59,12 @@ def result(request):
     c = allcourse(docum, b)
     a = allroom(docum, b)
     if (methode == 1) :
-        print("simulated")
+        X = simulated_annealing(c, a, 1)
+        X.simulate()
         #simulated anealing
     elif (methode == 2) :
-        print("genetic")
+        X = genetic_algorithm(c, a, 4)
+        X.genetic_start()
         #genetic algorithm
     else :
         X = hillclimbing(c, a)

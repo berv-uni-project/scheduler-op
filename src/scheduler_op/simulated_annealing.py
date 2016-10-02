@@ -1,4 +1,4 @@
-from hill_climbing import *
+from scheduler_op.hill_climbing import *
 import math
 import random
 
@@ -60,7 +60,7 @@ class simulated_annealing :
         for v in self.var:
             print(v)
         print(str(gettotalconflictpersks(self.var)))
-
+"""
 #main test
 b = Bacafile()
 c = allcourse("doc/Testcase.txt", b)
@@ -68,4 +68,5 @@ a = allroom("doc/Testcase.txt", b)
 #print(a)
 #print(c)
 X = simulated_annealing(c, a, 1)
-X.simulate()
+X.simulate(
+"""
