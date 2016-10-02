@@ -1,7 +1,5 @@
 import random
-
 from scheduler_op.class_cons import *
-
 
 class ActionClass:
     def __init__(self, con, var):
@@ -238,12 +236,11 @@ class hillclimbing:
 
 
 
-
 """
 #main test
 b = Bacafile()
-c = allcourse("doc/Testcase.txt", b)
-a = allroom("doc/Testcase.txt", b)
+c = allcourse("media/documents/Testcase.txt", b)
+a = allroom("media/documents/Testcase.txt", b)
 #print(a)
 #print(c)
 #var = initialize(c, a)

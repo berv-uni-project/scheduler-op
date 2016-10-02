@@ -70,17 +70,6 @@
 
         <section id="recent-works">
             <div class="container">
-        <!-- List of uploaded documents -->
-        <h2 class="wisteria">Recently Uploaded Files</h2>
-        {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li class="list-file"><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="list-file">No documents.</p>
-        {% endif %}
 
         <h2 class="peter-river">Input Your File To Bottom</h2>
         <!-- Upload form. Note enctype attribute! -->

@@ -1,16 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.conf import settings
+import os.path
+import platform
 
 from .forms import UploadFileForm
 from .models import Document
+from scheduler_op.hill_climbing import *
+from scheduler_op.bacafilez import *
+from scheduler_op.class_cons import *
 
 def list(request):
     # Handle file upload
+    documents = Document.objects.all()
+    for document in documents:
+        document.delete()
+
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc = Document(id=1,docfile=request.FILES['docfile'])
             newdoc.save()
             methode = form.cleaned_data['radiobutton']
             # Redirect to the document list after POST
@@ -32,9 +41,30 @@ def about(request):
     return render(request, 'about.html')
 
 def loading(request):
-    document = Document.objects.all().last();
     methode = request.GET.get('methode')
-    return render(request, 'run.html', {'document':document, 'methode':methode})
+    return HttpResponseRedirect('/result/?methode='+methode)
 
 def result(request):
+    document = Document.objects.all().last()
+    methode = request.GET.get('methode')
+    SITE_ROOT = os.path.join(settings.BASE_DIR, 'scheduler_op/media/')
+    docum = os.path.join(SITE_ROOT+document.docfile.name)
+    system = platform.system()
+    if (system=="Windows"):
+        docum = docum.replace('/','\\')
+    print(docum)
+    b = Bacafile()
+    c = allcourse(docum, b)
+    a = allroom(docum, b)
+    if (methode == 1) :
+        print("simulated")
+        #simulated anealing
+    elif (methode == 2) :
+        print("genetic")
+        #genetic algorithm
+    else :
+        X = hillclimbing(c, a)
+        X.start()
+        #default hill climbing
+
     return render(request,'result.html');

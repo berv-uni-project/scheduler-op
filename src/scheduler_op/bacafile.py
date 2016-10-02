@@ -71,7 +71,7 @@ class Bacafile:
         elif x == '9':
             return 9
 
-
+"""
 # main, contoh
 b = Bacafile()                      # b, class bacafile
 f = open('masukan.txt', 'r')           # f, var file txt
@@ -80,3 +80,4 @@ print(b.hitungbaris('masukan.txt'))
 f = open('masukan.txt', 'r')
 for ii in range(30):
     print(b.bacakata(f, len(r)))
+"""
