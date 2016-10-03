@@ -28,6 +28,7 @@ def initialize(coursel, rooml):
 <<<<<<< HEAD
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
                 end = start + co.sks - 1
+<<<<<<< HEAD
 =======
                 if r[0]-r[1]-co.sks+1>1:
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
@@ -35,6 +36,8 @@ def initialize(coursel, rooml):
                     start = r[0]
                 end = start + co.sks
 >>>>>>> e9fb1e6... fix the random in initializer
+=======
+>>>>>>> b0864f2... fix hill
                 var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id)
                 #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
@@ -59,6 +62,7 @@ def initialize(coursel, rooml):
 <<<<<<< HEAD
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
                     end = start + co.sks - 1
+<<<<<<< HEAD
 =======
                     if r[0]-r[1]-co.sks+1 > 1:
                         start = ran.randrange(r[0], r[1] - co.sks + 1)
@@ -66,6 +70,8 @@ def initialize(coursel, rooml):
                         start = r[0]
                     end = start + co.sks
 >>>>>>> e9fb1e6... fix the random in initializer
+=======
+>>>>>>> b0864f2... fix hill
                     # print(R.room_id)
                     var = CSPvar(co.id, co.courseid, start, end, day, R.room_id)
                     #print('else', var.course, var.start, var.end, var.day, var.room)
