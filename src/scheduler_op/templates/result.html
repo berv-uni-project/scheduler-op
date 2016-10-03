@@ -99,11 +99,9 @@
                             {% for j in day %}
                                 {% if room.validday and i >= room.start and i <= room.end %}
                                     <td id="{{ i }}-{{ j }}" class="open">
-                                        Yes
                                     </td>
                                     {% else %}
                                     <td id="{{ i }}-{{ j }}" class="closed">
-                                        -
                                     </td>
 
                                 {% endif %}

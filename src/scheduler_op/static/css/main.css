@@ -1162,9 +1162,17 @@ ul.tab li.tab a.tablinks:focus{background-color: #ccc;}
         padding: 5px 10px;
     }
 
-    td:hover
+    td.open:hover
     {
         cursor: pointer;
-        background: #666;
-        color: white;
+        background: #999;
+        color: whitesmoke;
+    }
+
+    td.open {
+      background-color: white;
+    }
+
+    td.closed {
+      background-color: black;
     }
