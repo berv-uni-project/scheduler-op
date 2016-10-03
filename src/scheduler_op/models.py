@@ -14,9 +14,6 @@ class Document(models.Model):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         super(Document, self).delete(*args, **kwargs)
 
-class Slot(models.Model):
-    room = models.CharField(max_length=20)
-
 
 
 
