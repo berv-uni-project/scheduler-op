@@ -12,6 +12,7 @@ from scheduler_op.genetic_algorithm import *
 from scheduler_op.bacafilez import *
 from scheduler_op.class_cons import *
 
+#render home page
 def list(request):
     # Handle file upload
     documents = Document.objects.all()
@@ -39,13 +40,16 @@ def list(request):
         {'documents': documents, 'form': form}
     )
 
+#render about page
 def about(request):
     return render(request, 'about.html')
 
+#transient page
 def loading(request):
     methode = request.GET.get('methode')
     return HttpResponseRedirect('/result/?methode='+methode)
 
+#render result page
 def result(request):
     document = Document.objects.all().last()
     methode = request.GET.get('methode')
