@@ -167,6 +167,9 @@
             }
 <<<<<<< HEAD
             window.onload=function(){
+                    var red = 0;
+                    var green = 200;
+                    var blue = 0;
                     {% for course in X.var %}
                         for (j = {{ course.start }}; j <={{ course.end }}; j++) {
                             var str1 = j.toString().concat("-");
@@ -174,9 +177,14 @@
                             var str2 = day.concat("-");
                             var name = "{{ course.room }}";
                             var strhasil = str1.concat(str2,name);
-                            var strlama = document.getElementById(strhasil).innerHTML;
-                            document.getElementById(strhasil).innerHTML = strlama.concat(" ").concat("{{ course.course }}");
+                            var strlama =  document.getElementById(strhasil).innerHTML;
+                            document.getElementById(strhasil).innerHTML =  strlama.concat(" ","{{ course.course }}");
+                            var colored = red.toString().concat(",",green.toString(),",",blue.toString());
+                            document.getElementById(strhasil).style.background="rgb(".concat(colored,")");
                         }
+                        red = red + 10;
+                        green = green - 10;
+                        blue = blue + 20;
                     {% endfor %}
             };
 =======
