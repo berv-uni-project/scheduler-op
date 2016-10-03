@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="about-us/">About Us</a></li>
+                    <li><a href="/about-us/">About Us</a></li>
                 </ul>
             </div>
         </div>
@@ -78,7 +78,7 @@
             <div class="container">
                 <ul class="tab">
                     {%  for room in allroom %}
-                    <li><a href="#" class="tablinks" onclick="openRoom(event,'{{ room.room_id }}')">{{ room.room_id }}</a></li>
+                    <li class="tab"><a href="#" class="tablinks" onclick="openRoom(event,'{{ room.room_id }}')">{{ room.room_id }}</a></li>
                     {% endfor %}
                 </ul>
                     {%  for room in allroom %}
