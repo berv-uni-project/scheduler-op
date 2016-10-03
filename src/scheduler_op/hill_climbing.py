@@ -26,7 +26,14 @@ def initialize(coursel, rooml):
                     day = d[0]
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
+=======
+                if r[0]-r[1]-co.sks +1>1:
+                    start = ran.randrange(r[0], r[1] - co.sks + 1)
+                else:
+                    start = r[0]
+>>>>>>> 986cb52... fix random initialize
                 end = start + co.sks - 1
 <<<<<<< HEAD
 =======
@@ -60,7 +67,14 @@ def initialize(coursel, rooml):
                         day = d[0]
                     r = getrange(R.start, co.start, R.end, co.end)
 <<<<<<< HEAD
+<<<<<<< HEAD
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
+=======
+                    if r[0] - r[1] - co.sks + 1 > 1:
+                        start = ran.randrange(r[0], r[1] - co.sks + 1)
+                    else:
+                        start = r[0]
+>>>>>>> 986cb52... fix random initialize
                     end = start + co.sks - 1
 <<<<<<< HEAD
 =======
