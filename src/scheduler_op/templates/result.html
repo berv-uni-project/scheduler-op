@@ -171,7 +171,7 @@
                             var name = "{{ course.course }}";
                             var strhasil = str1.concat(str2,name);
                             var strlama = document.getElementById(strhasil).innerHTML;
-                            document.getElementById(strhasil).innerHTML = strlama.concat(" ").concat(name);
+                            document.getElementById(strhasil).innerHTML = strlama.concat(" ").concat("{{ course.course }}");
                         }
                     {% endfor %}
             };
