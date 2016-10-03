@@ -162,23 +162,19 @@
                 document.getElementById(roomName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
-            function getcourse(courses){
-                 for (i=0; i<course.length; i++) {
-                     var courseid = course[i].course;
-                     var day = course[i].day;
-                     var start = course[i].start;
-                     var end = course[i].end;
-                     var room = course[id].room
-                     for(j = start; j<=end; j++){
-                         var str1 = i.toString().concat("-");
-                         var str2 = day.toString().concat("-");
-                         var strhasil = str1.concat(str2).concat(room);
-                         var strlama = document.getElementById(strhasil).innerText;
-                         document.getElementById(strhasil).innerText= strlama.concat(" ").concat(room);
-                     }
-
-                }
-            }
+            window.onload=function(){
+                    {% for course in X.var %}
+                        for (j = {{ course.start }}; j <={{ course.end }}; j++) {
+                            var str1 = j.toString().concat("-");
+                            var day = "{{ course.day }}";
+                            var str2 = day.concat("-");
+                            var name = "{{ course.course }}";
+                            var strhasil = str1.concat(str2,name);
+                            var strlama = document.getElementById(strhasil).innerHTML;
+                            document.getElementById(strhasil).innerHTML = strlama.concat(" ").concat(name);
+                        }
+                    {% endfor %}
+            };
         </script>
     </body>
 
