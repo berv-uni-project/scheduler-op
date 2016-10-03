@@ -59,7 +59,7 @@ def result(request):
     c = allcourse(docum, b)
     a = allroom(docum, b)
     if (methode == 1) :
-        X = simulated_annealing(c, a, 1)
+        X = simulated_annealing(c, a, 0.8)
         X.simulate()
         #simulated anealing
     elif (methode == 2) :
