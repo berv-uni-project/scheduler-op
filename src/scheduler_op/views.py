@@ -72,4 +72,4 @@ def result(request):
         #default hill climbing
 
     conflict = str(gettotalconflict(X.var))
-    return render(request,'result.html',{'X':X,'conflict':conflict});
+    return render(request,'result.html',{'X':X,'conflict':conflict,'allroom':a.roomlist});
