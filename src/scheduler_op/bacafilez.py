@@ -59,6 +59,7 @@ print(b.hitungbaris("Testcase.txt"))
 f = open("Testcase.txt", 'r')
 for ii in range(30):
     print(b.bacakata(f, len(r))) """
-
+"""
 b = Bacafile()
 s = "neko;is;dead"
+"""
