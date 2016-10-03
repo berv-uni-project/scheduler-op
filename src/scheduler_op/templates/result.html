@@ -168,7 +168,7 @@
                             var str1 = j.toString().concat("-");
                             var day = "{{ course.day }}";
                             var str2 = day.concat("-");
-                            var name = "{{ course.course }}";
+                            var name = "{{ course.room }}";
                             var strhasil = str1.concat(str2,name);
                             var strlama = document.getElementById(strhasil).innerHTML;
                             document.getElementById(strhasil).innerHTML = strlama.concat(" ").concat("{{ course.course }}");
