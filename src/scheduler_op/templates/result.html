@@ -168,8 +168,11 @@
 <<<<<<< HEAD
             window.onload=function(){
                     var red = 0;
-                    var green = 200;
+                    var green = 250;
                     var blue = 0;
+                    var rmod = 15;
+                    var gmod = 25;
+                    var bmod = 20;
                     {% for course in X.var %}
                         for (j = {{ course.start }}; j <={{ course.end }}; j++) {
                             var str1 = j.toString().concat("-");
@@ -182,9 +185,22 @@
                             var colored = red.toString().concat(",",green.toString(),",",blue.toString());
                             document.getElementById(strhasil).style.background="rgb(".concat(colored,")");
                         }
-                        red = red + 10;
-                        green = green - 10;
-                        blue = blue + 20;
+                        red = red + rmod;
+                        green = green - gmod;
+                        blue = blue + bmod;
+                        if (blue > 210) {
+                            blue = 10;
+                            bmod = bmod + 5;
+                        }
+                        if (green < 50) {
+                            green = 220;
+                            gmod = gmod + 5;
+                        }
+                        if (red > 200) {
+                            red = 30;
+                            rmod = rmod + 10;
+                        }
+
                     {% endfor %}
             };
 =======
