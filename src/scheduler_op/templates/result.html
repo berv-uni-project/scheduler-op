@@ -85,7 +85,6 @@
                     <div id="{{ room.room_id }}" class="tabcontent">
                     <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
                     <table id="{{ room.room_id }}">
-                        <div id="table-header">
                             <tr>
                                 <th>Time</th>
                                 <th>Monday</th>
@@ -94,14 +93,20 @@
                                 <th>Thrusday</th>
                                 <th>Friday</th>
                             </tr>
-                        </div>
                         {% for i in time %}
                             <tr id="{{ i }}">
                             <th>{{ i }}:00</th>
                             {% for j in day %}
-                                <td id="{{ i }}-{{ j }}" class="closed">
-                                -
-                                </td>
+                                {% if room.validday and i >= room.start and i <= room.end %}
+                                    <td id="{{ i }}-{{ j }}" class="open">
+                                        Yes
+                                    </td>
+                                    {% else %}
+                                    <td id="{{ i }}-{{ j }}" class="closed">
+                                        -
+                                    </td>
+
+                                {% endif %}
                             {% endfor %}
                             </tr>
                         {% endfor %}
