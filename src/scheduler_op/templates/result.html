@@ -96,13 +96,16 @@
                         {% for i in time %}
                             <tr id="{{ i }}">
                             <th>{{ i }}:00</th>
-                            {% for j in day %}
-                                {% if room.validday and i >= room.start and i <= room.end %}
-                                    <td id="{{ i }}-{{ j }}-{{ room.room_id }}" class="open">
-                                    </td>
+                            {% for day in room.validday.day %}
+                                {% if forloop.counter0 > 0 %}
+                                    {% if day and i >= room.start and i <= room.end %}
+                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open">
+                                        </td>
                                     {% else %}
-                                    <td id="{{ i }}-{{ j }}-{{ room.room_id }}" class="closed">
+                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed">
                                     </td>
+                                    {% endif %}
+                                {% else %}
 
                                 {% endif %}
                             {% endfor %}

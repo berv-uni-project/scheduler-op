@@ -26,7 +26,7 @@ def initialize(coursel, rooml):
                     day = d[0]
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
-                end = start + co.sks
+                end = start + co.sks - 1
                 var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id)
                 #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
@@ -49,7 +49,7 @@ def initialize(coursel, rooml):
                         day = d[0]
                     r = getrange(R.start, co.start, R.end, co.end)
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
-                    end = start + co.sks
+                    end = start + co.sks - 1
                     # print(R.room_id)
                     var = CSPvar(co.id, co.courseid, start, end, day, R.room_id)
                     #print('else', var.course, var.start, var.end, var.day, var.room)
