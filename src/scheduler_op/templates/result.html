@@ -98,10 +98,10 @@
                             <th>{{ i }}:00</th>
                             {% for j in day %}
                                 {% if room.validday and i >= room.start and i <= room.end %}
-                                    <td id="{{ i }}-{{ j }}" class="open">
+                                    <td id="{{ i }}-{{ j }}-{{ room.room_id }}" class="open">
                                     </td>
                                     {% else %}
-                                    <td id="{{ i }}-{{ j }}" class="closed">
+                                    <td id="{{ i }}-{{ j }}-{{ room.room_id }}" class="closed">
                                     </td>
 
                                 {% endif %}
@@ -161,6 +161,23 @@
                 // Show the current tab, and add an "active" class to the link that opened the tab
                 document.getElementById(roomName).style.display = "block";
                 evt.currentTarget.className += " active";
+            }
+            function getcourse(courses){
+                 for (i=0; i<course.length; i++) {
+                     var courseid = course[i].course;
+                     var day = course[i].day;
+                     var start = course[i].start;
+                     var end = course[i].end;
+                     var room = course[id].room
+                     for(j = start; j<=end; j++){
+                         var str1 = i.toString().concat("-");
+                         var str2 = day.toString().concat("-");
+                         var strhasil = str1.concat(str2).concat(room);
+                         var strlama = document.getElementById(strhasil).innerText;
+                         document.getElementById(strhasil).innerText= strlama.concat(" ").concat(room);
+                     }
+
+                }
             }
         </script>
     </body>
