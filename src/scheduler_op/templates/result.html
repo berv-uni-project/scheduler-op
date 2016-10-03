@@ -23,11 +23,10 @@
         </style>
         <style>
             h2 {
-                border-bottom: 3px solid;
-                line-height: 1.75em;
+                padding-top: 8px;
                 padding-bottom: 8px;
                 text-align: center;
-                width: 60%;
+                width: 100%;
             }
 
             img.logo {
@@ -58,52 +57,88 @@
             </div>
         </div>
     </header><!--/header-->
-
-        <section id="my-result">
+    {% if X %}
+    <section id="my-result">
         <div class="container">
-        <h2 class="pumkin">7602</h2>
+            <div class="row">
+            <aside class="col-sm-4 col-sm-push-8">
+                <div class="Jumlah-Konflik">Jumlah Konflik : {{ conflict }}</div>
+                <div class="Hasil-Detail">
+                    <b>Hasil Detail :</b>
+                    <br>
+                    {% for class in X.var %}
+                        <div class="id-{{ class.id }}">{{ class }}</div>
+                    {% endfor %}
+                </div>
+            </aside>
 
-        <div id="day-schedule"></div>
+        <br>
 
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="{% static 'js/index.js'%}"></script>
+        <div class="col-sm-8 col-sm-pull-4">
+            <div class="container">
+                <div class="col-md-4 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <a class="btn btn-danger" href="#scroller" data-slide="prev"><i class="icon-angle-left"></i></a>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <h4>7602</h4>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <a class="btn btn-danger" href="#scroller" data-slide="next"><i class="icon-angle-right"></i></a>
+                            </div>
+                        </div>
+                </div>
+            </div>
 
-
-    <script>
-    (function ($) {
-      $("#day-schedule").dayScheduleSelector({
-        /*
-        days: [1, 2, 3, 5, 6],
-        interval: 15,
-        startTime: '09:50',
-        endTime: '21:06'
-        */
-      });
-      $("#day-schedule").on('selected.artsy.dayScheduleSelector', function (e, selected) {
-        console.log(selected);
-      })
-      $("#day-schedule").data('artsy.dayScheduleSelector').deserialize({
-        '0': [['09:30', '11:00'], ['13:00', '16:30']]
-      });
-    })($);
-    </script>
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-36251023-1']);
-        _gaq.push(['_setDomainName', 'jqueryscript.net']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+                <div id="day-schedule"></div>
+                    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+                    <script src="{% static 'js/index.js'%}"></script>
+                    <script>
+                        (function ($) {
+                            $("#day-schedule").dayScheduleSelector({
+                                /*
+                                days: [1, 2, 3, 5, 6],
+                                interval: 15,
+                                startTime: '09:50',
+                                endTime: '21:06'
+                                */
+                            });
+                            $("#day-schedule").on('selected.artsy.dayScheduleSelector', function (e, selected) {
+                                console.log(selected);
+                            })
+                            $("#day-schedule").data('artsy.dayScheduleSelector').deserialize({
+                                '0': [['09:30', '11:00'], ['13:00', '16:30']]
+                            });
+                        })($);
+                    </script>
+                    <script type="text/javascript">
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-36251023-1']);
+                        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+                        _gaq.push(['_trackPageview']);
+                        (function() {
+                            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                    </script>
+            </div>
         </div>
-        </section>
-     <br><br>
-
+    </div>
+    </section>
+         <br><br>
+    {% else %}
+        <p> No Output. </p>
+    {% endif %}
         <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">

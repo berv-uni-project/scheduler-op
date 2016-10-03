@@ -71,4 +71,5 @@ def result(request):
         X.start()
         #default hill climbing
 
-    return render(request,'result.html');
+    conflict = str(gettotalconflict(X.var))
+    return render(request,'result.html',{'X':X,'conflict':conflict});
