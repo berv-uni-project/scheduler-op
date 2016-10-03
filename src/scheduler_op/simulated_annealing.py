@@ -29,37 +29,42 @@ class simulated_annealing :
         min = gettotalconflict(self.var)
         idx = 0
         j = 0
-        for act in self.action:
-            var_temp = CSPvarlist(self.var)
-            i = 0
-            while var_temp.var[i].id != act.change.id:
-                i+=1
-            var_temp.var[i].start = act.change.start
-            var_temp.var[i].end = act.change.end
-            var_temp.var[i].day = act.change.day
-            var_temp.var[i].room = act.change.room
-            act.change.numcon = gettotalconflict(var_temp.var)
-            var_ei = act.change.numcon
-            var_e = min
-            if (act.change.numcon < min) or (math.exp(-(var_e - var_ei) / self.tempnow)) <= ran.randrange(0, 1):
-                min = act.change.numcon
-                idx = j
-            j += 1
-            k = 0
-            while self.var[k].id!=self.action[idx].change.id:
-                k += 1
-            self.var[k].start = self.action[idx].change.start
-            self.var[k].end = self.action[idx].change.end
-            self.var[k].day = self.action[idx].change.day
-            self.var[k].room = self.action[idx].change.room
-            count = count+1
+        loop = 0
+        while (gettotalconflict(self.var)>0 and loop < 100):
+            for act in self.action:
+                var_temp = CSPvarlist(self.var)
+                i = 0
+                while var_temp.var[i].id != act.change.id:
+                    i+=1
+                var_temp.var[i].start = act.change.start
+                var_temp.var[i].end = act.change.end
+                var_temp.var[i].day = act.change.day
+                var_temp.var[i].room = act.change.room
+                act.change.numcon = gettotalconflict(var_temp.var)
+                var_ei = act.change.numcon
+                var_e = min
+                if (act.change.numcon < min) or (math.exp(-(var_e - var_ei) / self.tempnow)) <= ran.randrange(0, 1):
+                    min = act.change.numcon
+                    idx = j
+                j += 1
+                k = 0
+                while self.var[k].id!=self.action[idx].change.id:
+                    k += 1
+                self.var[k].start = self.action[idx].change.start
+                self.var[k].end = self.action[idx].change.end
+                self.var[k].day = self.action[idx].change.day
+                self.var[k].room = self.action[idx].change.room
+                count = count+1
 
-            if gettotalconflict(self.var) == 0 or count > 500:
-                break
+                if gettotalconflict(self.var) == 0 or count > 500:
+                    break
+            loop+= 1
 
         for v in self.var:
             print(v)
         print(str(gettotalconflictpersks(self.var)))
+
+
 """
 #main test
 b = Bacafile()
@@ -68,5 +73,5 @@ a = allroom("doc/Testcase.txt", b)
 #print(a)
 #print(c)
 X = simulated_annealing(c, a, 1)
-X.simulate(
+X.simulate()
 """
