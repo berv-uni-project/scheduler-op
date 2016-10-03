@@ -1140,3 +1140,31 @@ ul.tab li a:focus, .active {background-color: #ccc;}
     from {opacity: 0;}
     to {opacity: 1;}
 }
+
+
+    th,td
+    {
+        margin: 0;
+        text-align: center;
+        border-collapse: collapse;
+        outline: 1px solid #e3e3e3;
+    }
+
+    td
+    {
+        padding: 5px 10px;
+    }
+
+    th
+    {
+        background: #A52A2A;
+        color: white;
+        padding: 5px 10px;
+    }
+
+    td:hover
+    {
+        cursor: pointer;
+        background: #666;
+        color: white;
+    }

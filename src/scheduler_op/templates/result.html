@@ -84,6 +84,29 @@
                     {%  for room in allroom %}
                     <div id="{{ room.room_id }}" class="tabcontent">
                     <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
+                    <table id="{{ room.room_id }}">
+                        <div id="table-header">
+                            <tr>
+                                <th>Time</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thrusday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </div>
+                        {% for i in time %}
+                            <tr id="{{ i }}">
+                            <th>{{ i }}:00</th>
+                            {% for j in day %}
+                                <td id="{{ i }}-{{ j }}" class="closed">
+                                -
+                                </td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+
+                    </table>
                     </div>
                     {% endfor %}
             </div>
