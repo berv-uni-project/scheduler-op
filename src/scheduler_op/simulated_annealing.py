@@ -48,13 +48,19 @@ class simulated_annealing :
                     idx = j
                 j += 1
                 k = 0
-                while self.var[k].id!=self.action[idx].change.id:
-                    k += 1
-                self.var[k].start = self.action[idx].change.start
-                self.var[k].end = self.action[idx].change.end
-                self.var[k].day = self.action[idx].change.day
-                self.var[k].room = self.action[idx].change.room
-                count = count+1
+
+                if (idx != 0):
+                    while self.var[k].id!=self.action[idx].change.id:
+                        k += 1
+                        if (k == len(self.var)):
+                            k=k-1;
+                            break;
+
+                    self.var[k].start = self.action[idx].change.start
+                    self.var[k].end = self.action[idx].change.end
+                    self.var[k].day = self.action[idx].change.day
+                    self.var[k].room = self.action[idx].change.room
+                    count = count+1
 
                 if gettotalconflict(self.var) == 0 or count > 500:
                     break

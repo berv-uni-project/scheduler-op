@@ -60,13 +60,16 @@ class genetic_algorithm:
         endloop = False
         loop = 0
         ran = random
-        while (endloop == False):
+        while (endloop == False and loop < len(self.action.change)):
+
             vary = self.action[loop]
-            print('masuk mutasi, loop ', loop)
             var_temp = CSPvarlist(self.all_strings[index])
             i = 0
             while var_temp.var[i].id != vary.change.id:
                 i += 1
+                if (i == len(var_temp.var)):
+                    i = i-1;
+                    break;
             var_temp.var[i].start = vary.change.start
             var_temp.var[i].end = vary.change.end
             var_temp.var[i].day = vary.change.day
@@ -77,6 +80,10 @@ class genetic_algorithm:
                 k = 0
                 while self.all_strings[index][k].id!= vary.change.id:
                     k += 1
+                    if (k == len(self.all_strings[index])):
+                        k=k-1;
+                        break;
+
                 self.all_strings[index][k].start = vary.change.start
                 self.all_strings[index][k].end = vary.change.end
                 self.all_strings[index][k].day = vary.change.day

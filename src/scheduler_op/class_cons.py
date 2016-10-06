@@ -77,7 +77,7 @@ class allroom:
                     continue
                 else:
                     r = getrange(room.start, co.start, room.end, co.end)
-                    if (co.sks > r[1] - r[0] + 1):
+                    if (co.sks > r[1] - r[0]):
                         continue
                     else:
                         R.append(room)

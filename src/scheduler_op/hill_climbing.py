@@ -6,14 +6,19 @@ class ActionClass:
         self.numcon = con
         self.change = var
 
+invalid_course = []
+
+
 def initialize(coursel, rooml):
     ran = random
     X = []
+    global invalid_course
     for co in coursel.courselist:
         if co.room_cons == '-':
             R = rooml.getvalidroom(co)
             if (not R):
-                print("No compatible room for this course")
+                print("No compatible room for this course", co.courseid)
+                invalid_course.append(co)
             else:
                 if len(R) > 1:
                     i = ran.randrange(0, len(R))
@@ -27,6 +32,7 @@ def initialize(coursel, rooml):
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 start = ran.randrange(r[0], r[1] - co.sks + 1)
 =======
                 if r[0]-r[1]-co.sks +1>1:
@@ -34,6 +40,13 @@ def initialize(coursel, rooml):
                 else:
                     start = r[0]
 >>>>>>> 986cb52... fix random initialize
+=======
+                if r[0]-r[1]-co.sks>1:
+                    start = ran.randrange(r[0], r[1] - co.sks)
+                else:
+                    start = r[0]
+
+>>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
                 end = start + co.sks - 1
 <<<<<<< HEAD
 =======
@@ -55,7 +68,7 @@ def initialize(coursel, rooml):
                     R = room
                     break
             if R is None:
-                print("No compatible room for this course")
+                print("No compatible room for this course", co.courseid)
             else:
                 if (co.sks >= R.end - R.start + 1):
                     print("No compatible room for this course")
@@ -68,6 +81,7 @@ def initialize(coursel, rooml):
                     r = getrange(R.start, co.start, R.end, co.end)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     start = ran.randrange(r[0], r[1] - co.sks + 1)
 =======
                     if r[0] - r[1] - co.sks + 1 > 1:
@@ -75,6 +89,13 @@ def initialize(coursel, rooml):
                     else:
                         start = r[0]
 >>>>>>> 986cb52... fix random initialize
+=======
+                    if r[0] - r[1] - co.sks > 1:
+                        start = ran.randrange(r[0], r[1] - co.sks)
+                    else:
+                        start = r[0]
+
+>>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
                     end = start + co.sks - 1
 <<<<<<< HEAD
 =======
@@ -105,13 +126,14 @@ def getallaction (coursel, rooml):
                     d = day
                     r = getrange(room.start, co.start, room.end, co.end)
                     begin = r[0]
-                    end = r[1]-co.sks+1
-                    for i in range(begin, end+1):
-                        s = i
-                        e = i+co.sks-1
-                        var = CSPvar(co.id, c,s,e,d,ro)
-                        act = ActionClass(999,var)
-                        action.append(act)
+                    end = r[1]-co.sks
+                    if (end >= begin) :
+                        for i in range(begin, end):
+                            s = i
+                            e = i+co.sks-1
+                            var = CSPvar(co.id, c,s,e,d,ro)
+                            act = ActionClass(999,var)
+                            action.append(act)
         else:
             R = None
             for room in rooml.roomlist:
@@ -127,13 +149,14 @@ def getallaction (coursel, rooml):
                     d = day
                     r = getrange(R.start, co.start, R.end, co.end)
                     begin = r[0]
-                    end = r[1] - co.sks + 1
-                    for i in range(begin,end+1):
-                        s = i
-                        e = i+co.sks-1
-                        var = CSPvar(co.id, c, s, e, d, ro)
-                        act = ActionClass(999,var)
-                        action.append(act)
+                    end = r[1] - co.sks
+                    if (end >= begin) :
+                        for i in range(begin,end):
+                            s = i
+                            e = i+co.sks-1
+                            var = CSPvar(co.id, c, s, e, d, ro)
+                            act = ActionClass(999,var)
+                            action.append(act)
     return action
 
 def gettotalconflict(var):
@@ -161,7 +184,6 @@ def gettotalconflictpersks(var):
             j += 1
         i += 1
     return sum
-
 
 class CSPvar (object) :
     def __init__(self, id, course, start, end, day, room):
@@ -259,13 +281,20 @@ class hillclimbing:
                     idx = j
                 j += 1
             i = 0
-            while self.var[i].id!=self.action[idx].change.id:
-                i += 1
-            self.var[i].start = self.action[idx].change.start
-            self.var[i].end = self.action[idx].change.end
-            self.var[i].day = self.action[idx].change.day
-            self.var[i].room = self.action[idx].change.room
-            count = count+1
+            if (idx!=0) :
+                while self.var[i].id!=self.action[idx].change.id:
+                    i += 1
+                    if (i == len(self.var)):
+                        i=i-1;
+                        break;
+                self.var[i].start = self.action[idx].change.start
+                self.var[i].end = self.action[idx].change.end
+                self.var[i].day = self.action[idx].change.day
+                self.var[i].room = self.action[idx].change.room
+                count = count+1
+            else:
+                count = 500;
+
         for v in self.var:
             print(v)
         print(str(gettotalconflictpersks(self.var)))
