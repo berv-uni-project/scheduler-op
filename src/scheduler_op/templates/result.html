@@ -81,6 +81,9 @@
 						<div> Tidak Ada </div>
 					{% endif %}
 				</div>
+            <div><b>Persentase ruangan yang dipakai :</b></div>
+            <div id="persen"></div>
+
             </aside>
 
         <br>
@@ -89,13 +92,13 @@
             <div class="container">
                 <ul class="tab">
                     {%  for room in allroom %}
-                    <li class="tab"><a href="#" class="tablinks" onclick="openRoom(event,'{{ room.room_id }}')">{{ room.room_id }}</a></li>
+                    <li class="tab"><a href="#" class="tablinks" onclick="openRoom(event,'{{ room.room_id }}-{{ room.id }}')">{{ room.room_id }}</a></li>
                     {% endfor %}
                 </ul>
                     {%  for room in allroom %}
-                    <div id="{{ room.room_id }}" class="tabcontent">
+                    <div id="{{ room.room_id }}-{{ room.id }}" class="tabcontent">
                     <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
-                    <table id="{{ room.room_id }}">
+                         <table id="{{ room.room_id }}-{{ room.id }}">
                             <tr>
                                 <th>Time</th>
                                 <th>Monday</th>
@@ -109,11 +112,11 @@
                             <th>{{ i }}:00</th>
                             {% for day in room.validday.day %}
                                 {% if forloop.counter0 > 0 %}
-                                    {% if day and i >= room.start and i <= room.end %}
-                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open">
+                                    {% if day and i >= room.start and i < room.end %}
+                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}" class="open">
                                         </td>
                                     {% else %}
-                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed">
+                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}" class="closed">
                                     </td>
                                     {% endif %}
                                 {% else %}
@@ -190,11 +193,12 @@
                             var day = "{{ course.day }}";
                             var str2 = day.concat("-");
                             var name = "{{ course.room }}";
-                            var strhasil = str1.concat(str2,name);
+                            var strhasil = str1.concat(str2,name,"-","{{ course.roomid }}");
                             var strlama =  document.getElementById(strhasil).innerHTML;
                             document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ","{{ course.course }}" , "</b>");
                             var colored = red.toString().concat(",",green.toString(),",",blue.toString());
                             document.getElementById(strhasil).style.background="rgb(".concat(colored,")");
+                            document.getElementById(strhasil).className="active";
                         }
                         red = red + rmod;
                         green = green - gmod;
@@ -213,6 +217,12 @@
                         }
 
                     {% endfor %}
+
+                var num = $('.active').length;
+                var open = $('.open').length;
+                document.getElementById("persen").innerHTML = (num-1)/(open+num-1)*100 + "%";
+
+
             };
 =======
             $window.onload=function {

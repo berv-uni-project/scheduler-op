@@ -34,7 +34,8 @@ class day_bool:
                 return True
 
 class room:
-    def __init__(self, rid, start, end, vday):
+    def __init__(self, id, rid, start, end, vday):
+        self.id = id;
         self.room_id = rid
         self.start = start
         self.end = end
@@ -54,15 +55,17 @@ class allroom:
         while (temp != "Ruangan" and temp != ""):
             temp = b.bacakata(f)
         temp = b.bacakata(f)
+        id = 0;
         while (temp != "Jadwal" and temp != ""):
             r_id = temp;
             start = b.strtojam(b.bacakata(f))
             end = b.strtojam(b.bacakata(f))
             temp = b.strtohari(b.bacakata(f))
             vday = day_bool(temp)
-            x = room(r_id, start, end, vday)
+            x = room(id, r_id, start, end, vday)
             (self.roomlist).append(x)
             temp = b.bacakata(f)
+            id = id + 1;
 
     def __str__(self):
         A = ""
@@ -73,14 +76,14 @@ class allroom:
     def getvalidroom(self, co):
         R=[]
         for room in self.roomlist:
-                if (not room.validday.ifsameday(co.validday)):
+            if (not room.validday.ifsameday(co.validday)):
+                continue
+            else:
+                r = getrange(room.start, co.start, room.end, co.end)
+                if (co.sks > r[1] - r[0]):
                     continue
                 else:
-                    r = getrange(room.start, co.start, room.end, co.end)
-                    if (co.sks > r[1] - r[0]):
-                        continue
-                    else:
-                        R.append(room)
+                    R.append(room)
         return R
 
 

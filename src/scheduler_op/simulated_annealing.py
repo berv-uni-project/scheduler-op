@@ -26,11 +26,11 @@ class simulated_annealing :
             i+=1
         count = 0
         ran = random
-        min = gettotalconflict(self.var)
+        min = gettotalconflictpersks(self.var)
         idx = 0
         j = 0
         loop = 0
-        while (gettotalconflict(self.var)>0 and loop < 100):
+        while (gettotalconflictpersks(self.var)>0 and loop < 100):
             for act in self.action:
                 var_temp = CSPvarlist(self.var)
                 i = 0
@@ -40,7 +40,8 @@ class simulated_annealing :
                 var_temp.var[i].end = act.change.end
                 var_temp.var[i].day = act.change.day
                 var_temp.var[i].room = act.change.room
-                act.change.numcon = gettotalconflict(var_temp.var)
+                var_temp.var[i].roomid = act.change.roomid
+                act.change.numcon = gettotalconflictpersks(var_temp.var)
                 var_ei = act.change.numcon
                 var_e = min
                 if (act.change.numcon < min) or (math.exp(-(var_e - var_ei) / self.tempnow)) <= ran.randrange(0, 1):
@@ -60,9 +61,10 @@ class simulated_annealing :
                     self.var[k].end = self.action[idx].change.end
                     self.var[k].day = self.action[idx].change.day
                     self.var[k].room = self.action[idx].change.room
+                    self.var[k].roomid = self.action[idx].change.roomid
                     count = count+1
 
-                if gettotalconflict(self.var) == 0 or count > 500:
+                if gettotalconflictpersks(self.var) == 0 or count > 500:
                     break
             loop+= 1
 

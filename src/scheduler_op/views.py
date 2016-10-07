@@ -67,7 +67,7 @@ def result(request):
         X.simulate()
         #simulated anealing
     elif (methode == 2) :
-        X = genetic_algorithm(c, a, 4)
+        X = genetic_algorithm(c, a, 400)
         X.genetic_start()
         #genetic algorithm
     else :

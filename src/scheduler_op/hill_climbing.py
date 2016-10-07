@@ -46,6 +46,7 @@ def initialize(coursel, rooml):
                     start = ran.randrange(r[0], r[1] - co.sks)
                 else:
                     start = r[0]
+<<<<<<< HEAD
 
 >>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
                 end = start + co.sks - 1
@@ -60,20 +61,31 @@ def initialize(coursel, rooml):
 =======
 >>>>>>> b0864f2... fix hill
                 var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id)
+=======
+              #  print(r[0],r[1])
+                end = start + co.sks - 1
+                var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id, R[i].id)
+>>>>>>> b6f783e... fixed
                 #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
         else:
-            R = None
+            R = []
             for room in rooml.roomlist:
-                if (room.room_id == co.room_cons):
-                    R = room
-                    break
+                if (not room.validday.ifsameday(co.validday)):
+                    continue
+                else:
+                    r = getrange(room.start, co.start, room.end, co.end)
+                    if (co.sks > r[1] - r[0]):
+                        continue
+                    else:
+                        R.append(room)
             if R is None:
                 print("No compatible room for this course", co.courseid)
             else:
-                if (co.sks >= R.end - R.start + 1):
-                    print("No compatible room for this course")
+                if len(R) > 1:
+                    i = ran.randrange(0, len(R))
                 else:
+<<<<<<< HEAD
                     d = co.validday.checksameday(R.validday)
                     if len(d) > 1:
                         day = d[ran.randrange(0, len(d) - 1)]
@@ -95,6 +107,19 @@ def initialize(coursel, rooml):
                         start = ran.randrange(r[0], r[1] - co.sks)
                     else:
                         start = r[0]
+=======
+                    i = 0
+                d = co.validday.checksameday(R[i].validday)
+                if len(d) > 1:
+                    day = d[ran.randrange(0, len(d) - 1)]
+                else:
+                    day = d[0]
+                r = getrange(R[i].start, co.start, R[i].end, co.end)
+                if r[0]-r[1]-co.sks>1:
+                    start = ran.randrange(r[0], r[1] - co.sks)
+                else:
+                    start = r[0]
+>>>>>>> b6f783e... fixed
 
 >>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
                     end = start + co.sks - 1
@@ -109,7 +134,7 @@ def initialize(coursel, rooml):
 =======
 >>>>>>> b0864f2... fix hill
                     # print(R.room_id)
-                    var = CSPvar(co.id, co.courseid, start, end, day, R.room_id)
+                    var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id, R[i].id)
                     #print('else', var.course, var.start, var.end, var.day, var.room)
                     X.append(var)
     return X
@@ -127,37 +152,37 @@ def getallaction (coursel, rooml):
                     d = day
                     r = getrange(room.start, co.start, room.end, co.end)
                     begin = r[0]
-                    end = r[1]-co.sks
+                    end = r[1]-co.sks+1
                     if (end >= begin) :
                         for i in range(begin, end):
                             s = i
                             e = i+co.sks-1
-                            var = CSPvar(co.id, c,s,e,d,ro)
+                            var = CSPvar(co.id, c,s,e,d,ro, room.id)
                             act = ActionClass(999,var)
                             action.append(act)
         else:
-            R = None
+            R = []
             for room in rooml.roomlist:
                 if room.room_id == co.room_cons:
-                    R = room
+                    R.append(room)
                     #print(R)
-                    break
             c = co.courseid
             ro = co.room_cons
-            dayl = co.validday.checksameday(R.validday)
             #print(dayl)
-            for day in dayl:
-                    d = day
-                    r = getrange(R.start, co.start, R.end, co.end)
-                    begin = r[0]
-                    end = r[1] - co.sks
-                    if (end >= begin) :
-                        for i in range(begin,end):
-                            s = i
-                            e = i+co.sks-1
-                            var = CSPvar(co.id, c, s, e, d, ro)
-                            act = ActionClass(999,var)
-                            action.append(act)
+            for room in R:
+                dayl = co.validday.checksameday(room.validday)
+                for day in dayl:
+                        d = day
+                        r = getrange(room.start, co.start, room.end, co.end)
+                        begin = r[0]
+                        end = r[1] - co.sks+1
+                        if (end >= begin) :
+                            for i in range(begin,end):
+                                s = i
+                                e = i+co.sks-1
+                                var = CSPvar(co.id, c, s, e, d, ro, room.id)
+                                act = ActionClass(999,var)
+                                action.append(act)
     return action
 
 def gettotalconflict(var):
@@ -180,24 +205,25 @@ def gettotalconflictpersks(var):
         while j < len(var):
             nconflict = var[i].conflictcheckpersks(var[j])
             if (nconflict > 0):
-                print("konflik antara ", var[i].course, ' dan ', var[j].course )
+                #print("konflik antara ", var[i].course, ' dan ', var[j].course )
                 sum = sum + nconflict
             j += 1
         i += 1
     return sum
 
 class CSPvar (object) :
-    def __init__(self, id, course, start, end, day, room):
+    def __init__(self, id, course, start, end, day, room, roomid):
         self.id = id
         self.course = course
         self.start = start
         self.end = end
         self.day = day
         self.room = room
-        
+        self.roomid = roomid
+
     def conflictcheck (self, cspvar2) :
         if type(cspvar2) is CSPvar:
-            if self.room == cspvar2.room :
+            if self.roomid == cspvar2.roomid :
                 if self.day == cspvar2.day :
                     if ((self.start >= cspvar2.start)and
                     (self.start<=cspvar2.end))or((cspvar2.start >= self.start)
@@ -212,7 +238,7 @@ class CSPvar (object) :
 
     def conflictcheckpersks (self, cspvar2) :
         if type(cspvar2) is CSPvar:
-            if self.room == cspvar2.room :
+            if self.roomid == cspvar2.roomid :
                 if self.day == cspvar2.day :
                     if ((self.start >= cspvar2.start) and (self.start<=cspvar2.end)):
                         #print('masuk 1 end', cspvar2.end, ' start ', self.start, ' jadi ', cspvar2.end - self.start + 1)
@@ -243,7 +269,7 @@ class CSPvarlist:
     def __init__(self, varlist):
         self.var = []
         for el in varlist:
-            var = CSPvar(el.id, el.course, el.start, el.end, el.day, el.room)
+            var = CSPvar(el.id, el.course, el.start, el.end, el.day, el.room, el.roomid)
             self.var.append(var)
 
 class hillclimbing:
@@ -263,7 +289,7 @@ class hillclimbing:
                 j+=1
             i+=1
         count = 0
-        while gettotalconflict(self.var)>0 and count <500 :
+        while gettotalconflictpersks(self.var)>0 and count <500 :
             min = 999
             idx = 0
             j = 0
@@ -276,9 +302,11 @@ class hillclimbing:
                 var_temp.var[i].end = act.change.end
                 var_temp.var[i].day = act.change.day
                 var_temp.var[i].room = act.change.room
-                act.change.numcon = gettotalconflict(var_temp.var)
+                var_temp.var[i].roomid = act.change.roomid
+                act.change.numcon = gettotalconflictpersks(var_temp.var)
                 if act.change.numcon<min:
                     min = act.change.numcon
+                    #print(min)
                     idx = j
                 j += 1
             i = 0
@@ -292,13 +320,14 @@ class hillclimbing:
                 self.var[i].end = self.action[idx].change.end
                 self.var[i].day = self.action[idx].change.day
                 self.var[i].room = self.action[idx].change.room
+                self.var[i].roomid = self.action[idx].change.roomid
                 count = count+1
             else:
                 count = 500;
 
-        for v in self.var:
-            print(v)
-        print(str(gettotalconflictpersks(self.var)))
+        #for v in self.var:
+            #print(v)
+        #print(str(gettotalconflictpersks(self.var)))
 
 
 

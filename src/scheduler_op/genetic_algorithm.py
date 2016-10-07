@@ -74,8 +74,9 @@ class genetic_algorithm:
             var_temp.var[i].end = vary.change.end
             var_temp.var[i].day = vary.change.day
             var_temp.var[i].room = vary.change.room
-            vary.numcon = gettotalconflict(var_temp.var)
-            if (gettotalconflict(var_temp.var) < gettotalconflict(self.all_strings[index])) or \
+            var_temp.var[i].roomid = vary.change.roomid
+            vary.numcon = gettotalconflictpersks(var_temp.var)
+            if (gettotalconflictpersks(var_temp.var) < gettotalconflictpersks(self.all_strings[index])) or \
                     (loop >= len(self.action) - 2):
                 k = 0
                 while self.all_strings[index][k].id!= vary.change.id:
@@ -88,6 +89,7 @@ class genetic_algorithm:
                 self.all_strings[index][k].end = vary.change.end
                 self.all_strings[index][k].day = vary.change.day
                 self.all_strings[index][k].room = vary.change.room
+                self.all_strings[index][k].roomid = vary.change.roomid
                 endloop = True
             loop += 1
 
@@ -110,7 +112,7 @@ class genetic_algorithm:
 
             i = 0
             for str_var in self.all_strings:
-                if (gettotalconflict(str_var) == 0):
+                if (gettotalconflictpersks(str_var) == 0):
                     end = True
                     self.idx = i
                     break
@@ -118,18 +120,18 @@ class genetic_algorithm:
 
             move += 1
 
-        totalconflict = gettotalconflict(self.all_strings[self.idx])
+        totalconflict = gettotalconflictpersks(self.all_strings[self.idx])
         if (totalconflict > 0):
             i = 0
             for var in self.all_strings:
-                if (gettotalconflict(var) < totalconflict):
-                    totalconflict = gettotalconflict(var)
+                if (gettotalconflictpersks(var) < totalconflict):
+                    totalconflict = gettotalconflictpersks(var)
                     self.idx = i
                 i += 1
 
-        for v in self.all_strings[self.idx]:
-            print(v)
-        print(str(gettotalconflictpersks(self.all_strings[self.idx])))
+       # for v in self.all_strings[self.idx]:
+      #      print(v)
+     #   print(str(gettotalconflictpersks(self.all_strings[self.idx])))
 
 """
 #main test
