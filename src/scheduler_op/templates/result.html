@@ -70,6 +70,17 @@
                         <div class="id-{{ class.id }}">{{ class }}</div>
                     {% endfor %}
                 </div>
+				<div class="invalid-course">
+					<b> List mata kuliah yang tidak valid : </b>
+					<br>
+					{% if invalid_course %}
+						{% for course in invalid_course %}
+						<div class="invalid-{{ course.id}}">{{ course.courseid}}</div>
+						{% endfor %}
+					{% else %}
+						<div> Tidak Ada </div>
+					{% endif %}
+				</div>
             </aside>
 
         <br>
