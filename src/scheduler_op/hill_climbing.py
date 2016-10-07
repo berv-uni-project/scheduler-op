@@ -13,6 +13,7 @@ def initialize(coursel, rooml):
     ran = random
     X = []
     global invalid_course
+    invalid_course = []
     for co in coursel.courselist:
         if co.room_cons == '-':
             R = rooml.getvalidroom(co)
@@ -180,7 +181,7 @@ def gettotalconflictpersks(var):
             nconflict = var[i].conflictcheckpersks(var[j])
             if (nconflict > 0):
                 print("konflik antara ", var[i].course, ' dan ', var[j].course )
-                sum += nconflict
+                sum = sum + nconflict
             j += 1
         i += 1
     return sum

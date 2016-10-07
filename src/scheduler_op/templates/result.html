@@ -192,7 +192,7 @@
                             var name = "{{ course.room }}";
                             var strhasil = str1.concat(str2,name);
                             var strlama =  document.getElementById(strhasil).innerHTML;
-                            document.getElementById(strhasil).innerHTML =  strlama.concat(" ","{{ course.course }}");
+                            document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ","{{ course.course }}" , "</b>");
                             var colored = red.toString().concat(",",green.toString(),",",blue.toString());
                             document.getElementById(strhasil).style.background="rgb(".concat(colored,")");
                         }
