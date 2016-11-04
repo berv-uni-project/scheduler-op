@@ -1,0 +1,17 @@
+cffi==1.6.0
+chardet==2.3.0
+dj-database-url==0.4.1
+dj-static==0.0.6
+Django==1.10.1
+django-annoying==0.10.1
+django-scheduler==0.8
+gunicorn==19.6.0
+icalendar==3.10
+psycopg2==2.5.4
+pycparser==2.14
+PyNaCl==1.0.1
+python-dateutil==2.5.3
+pytz==2016.6.1
+six==1.10.0
+virtualenv==15.0.3
+whitenoise==3.2.2

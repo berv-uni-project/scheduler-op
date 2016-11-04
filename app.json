@@ -1,0 +1,17 @@
+{
+  "name": "scheduler-op",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python src/manage.py runserver"
+    }
+  ]
+}
