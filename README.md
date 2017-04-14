@@ -6,6 +6,12 @@ This is scheduler or timetabling that implements 3 algorithm. This web app using
 2. Simulated Annealing
 3. Genetic Algorithm
 
+## Program Demo
+
+Link : https://scheduler-op.herokuapp.com/
+
+This app have deployed to heroku. If have issue, please send me an issue. :)
+
 # Screenshot of Program
 
 ## Home Page
