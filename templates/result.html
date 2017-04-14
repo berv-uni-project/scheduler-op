@@ -179,7 +179,7 @@
                 document.getElementById(roomName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
-<<<<<<< HEAD
+
             window.onload=function(){
                     var red = 0;
                     var green = 250;
@@ -224,21 +224,6 @@
 
 
             };
-=======
-            $window.onload=function {
-                {% for course in X.var %}
-                     for(j = {{ course.start }}; j<={{ course.end }}; j++){
-                         var str1 = j.toString().concat("-");
-                         var day = "{{ course.day }}";
-                         var str2 = day.concat("-");
-                         var room = "{{ course.room }}";
-                         var strhasil = str1.concat(str2, room);
-                         var strlama = document.getElementById(strhasil).innerText;
-                         document.getElementById(strhasil).innerText = strlama.concat(" ", {{ course.courseid }});
-                     }
-                     {% endfor %}
-            });
->>>>>>> b0debee... id
         </script>
     </body>
 
