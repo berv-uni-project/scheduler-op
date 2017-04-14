@@ -31,42 +31,12 @@ def initialize(coursel, rooml):
                 else:
                     day = d[0]
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                start = ran.randrange(r[0], r[1] - co.sks + 1)
-=======
                 if r[0]-r[1]-co.sks +1>1:
-                    start = ran.randrange(r[0], r[1] - co.sks + 1)
-                else:
-                    start = r[0]
->>>>>>> 986cb52... fix random initialize
-=======
-                if r[0]-r[1]-co.sks>1:
                     start = ran.randrange(r[0], r[1] - co.sks)
                 else:
                     start = r[0]
-<<<<<<< HEAD
-
->>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
-                end = start + co.sks - 1
-<<<<<<< HEAD
-=======
-                if r[0]-r[1]-co.sks+1>1:
-                    start = ran.randrange(r[0], r[1] - co.sks + 1)
-                else:
-                    start = r[0]
-                end = start + co.sks
->>>>>>> e9fb1e6... fix the random in initializer
-=======
->>>>>>> b0864f2... fix hill
-                var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id)
-=======
-              #  print(r[0],r[1])
                 end = start + co.sks - 1
                 var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id, R[i].id)
->>>>>>> b6f783e... fixed
-                #print(var.course, var.start, var.end, var.day, var.room)
                 X.append(var)
         else:
             R = []
@@ -85,58 +55,22 @@ def initialize(coursel, rooml):
                 if len(R) > 1:
                     i = ran.randrange(0, len(R))
                 else:
-<<<<<<< HEAD
-                    d = co.validday.checksameday(R.validday)
-                    if len(d) > 1:
-                        day = d[ran.randrange(0, len(d) - 1)]
-                    else:
-                        day = d[0]
-                    r = getrange(R.start, co.start, R.end, co.end)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    start = ran.randrange(r[0], r[1] - co.sks + 1)
-=======
-                    if r[0] - r[1] - co.sks + 1 > 1:
-                        start = ran.randrange(r[0], r[1] - co.sks + 1)
-                    else:
-                        start = r[0]
->>>>>>> 986cb52... fix random initialize
-=======
-                    if r[0] - r[1] - co.sks > 1:
-                        start = ran.randrange(r[0], r[1] - co.sks)
-                    else:
-                        start = r[0]
-=======
                     i = 0
+
                 d = co.validday.checksameday(R[i].validday)
                 if len(d) > 1:
                     day = d[ran.randrange(0, len(d) - 1)]
                 else:
                     day = d[0]
                 r = getrange(R[i].start, co.start, R[i].end, co.end)
-                if r[0]-r[1]-co.sks>1:
+                if r[0]-r[1]-co.sks+1 > 1:
                     start = ran.randrange(r[0], r[1] - co.sks)
                 else:
                     start = r[0]
->>>>>>> b6f783e... fixed
 
->>>>>>> 4547c3c... fix time constrain (sudah sesuai spek)
-                    end = start + co.sks - 1
-<<<<<<< HEAD
-=======
-                    if r[0]-r[1]-co.sks+1 > 1:
-                        start = ran.randrange(r[0], r[1] - co.sks + 1)
-                    else:
-                        start = r[0]
-                    end = start + co.sks
->>>>>>> e9fb1e6... fix the random in initializer
-=======
->>>>>>> b0864f2... fix hill
-                    # print(R.room_id)
-                    var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id, R[i].id)
-                    #print('else', var.course, var.start, var.end, var.day, var.room)
-                    X.append(var)
+                end = start + co.sks -1
+                var = CSPvar(co.id, co.courseid, start, end, day, R[i].room_id, R[i].id)
+                X.append(var)
     return X
     
 def getallaction (coursel, rooml):
@@ -152,7 +86,7 @@ def getallaction (coursel, rooml):
                     d = day
                     r = getrange(room.start, co.start, room.end, co.end)
                     begin = r[0]
-                    end = r[1]-co.sks+1
+                    end = r[1] - co.sks + 1
                     if (end >= begin) :
                         for i in range(begin, end):
                             s = i
@@ -165,23 +99,21 @@ def getallaction (coursel, rooml):
             for room in rooml.roomlist:
                 if room.room_id == co.room_cons:
                     R.append(room)
-                    #print(R)
             c = co.courseid
             ro = co.room_cons
-            #print(dayl)
             for room in R:
                 dayl = co.validday.checksameday(room.validday)
                 for day in dayl:
                         d = day
                         r = getrange(room.start, co.start, room.end, co.end)
                         begin = r[0]
-                        end = r[1] - co.sks+1
+                        end = r[1] - co.sks + 1
                         if (end >= begin) :
-                            for i in range(begin,end):
+                            for i in range(begin, end):
                                 s = i
-                                e = i+co.sks-1
+                                e = i + co.sks - 1
                                 var = CSPvar(co.id, c, s, e, d, ro, room.id)
-                                act = ActionClass(999,var)
+                                act = ActionClass(999, var)
                                 action.append(act)
     return action
 
@@ -324,12 +256,6 @@ class hillclimbing:
                 count = count+1
             else:
                 count = 500;
-
-        #for v in self.var:
-            #print(v)
-        #print(str(gettotalconflictpersks(self.var)))
-
-
 
 
 """

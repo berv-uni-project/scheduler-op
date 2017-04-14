@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath /app/scheduler-op/admin "wsgi:application" --log-file -
+web: gunicorn untitled.wsgi

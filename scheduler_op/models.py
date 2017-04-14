@@ -13,7 +13,3 @@ class Document(models.Model):
     def delete(self, *args, **kwargs):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         super(Document, self).delete(*args, **kwargs)
-
-
-
-
