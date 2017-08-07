@@ -30,7 +30,7 @@ def list(request):
             newdoc.save()
             methode = form.cleaned_data['radiobutton']
             # Redirect to the document list after POST
-            return HttpResponseRedirect('/load/?methode=' + methode + "?file_id=" + file_id)
+            return HttpResponseRedirect('/load/?methode=' + methode + "&file_id=" + str(file_id))
     else:
         form = UploadFileForm()  # A empty, unbound form
 
@@ -51,14 +51,14 @@ def about(request):
 def loading(request):
     methode = request.GET.get('methode')
     doc_id = request.GET.get('file_id')
-    return HttpResponseRedirect('/result/?methode=' + methode + "?file_id=" + doc_id)
+    return HttpResponseRedirect('/result/?methode=' + methode + "&file_id=" + str(doc_id))
 
 
 # render result page
 def result(request):
     methode = request.GET.get('methode')
     doc_id = request.GET.get('file_id')
-    document = Document.objects.get(doc_id)
+    document = Document.objects.get(id=doc_id)
     SITE_ROOT = os.path.join(settings.BASE_DIR, 'scheduler_op/media/')
     docum = os.path.join(SITE_ROOT + document.docfile.name)
     system = platform.system()
