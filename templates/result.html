@@ -1,230 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        {% load static %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Scheduler OP</title>
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
-        <link href="{% static 'css/animate.css' %}" rel="stylesheet">
-        <!--[if lt IE 9]>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Scheduler OP</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
         <script src="{% static 'js/html5shiv.js' %}"></script>
         <script src="{% static 'js/respond.min.js' %}"></script>
         <![endif]-->
-        <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico'%}">
-        <link rel="stylesheet" type="text/css" href="{%static 'css/style.css'%}">
-        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-        <style>
-          body { font-family:'roboto'; background-color:#ECF0F1; }
-        </style>
-        <style>
-            h2 {
-                padding-top: 8px;
-                padding-bottom: 8px;
-                text-align: center;
-                width: 100%;
-            }
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: 'roboto';
+            background-color: #ECF0F1;
+        }
+    </style>
+    <style>
+        h2 {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            text-align: center;
+            width: 100%;
+        }
 
-            img.logo {
-                width: 198px;
-                height: 42px;
-            }
-        </style>
+        img.logo {
+            width: 198px;
+            height: 42px;
+        }
+    </style>
 
-    </head>
+</head>
 
-    <body>
-        <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/about-us/">About Us</a></li>
-                </ul>
-            </div>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
         </div>
-    </header><!--/header-->
-    {% if X %}
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/about-us/">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+</header><!--/header-->
+{% if X %}
     <section id="my-result">
         <div class="container">
             <div class="row">
-            <aside class="col-sm-4 col-sm-push-8">
-                <div class="Jumlah-Konflik">Jumlah Konflik : {{ conflict }}</div>
-                <div class="Hasil-Detail">
-                    <b>Hasil Detail :</b>
-                    <br>
-                    {% for class in X.var %}
-                        <div class="id-{{ class.id }}">{{ class }}</div>
-                    {% endfor %}
-                </div>
-				<div class="invalid-course">
-					<b> List mata kuliah yang tidak valid : </b>
-					<br>
-					{% if invalid_course %}
-						{% for course in invalid_course %}
-						<div class="invalid-{{ course.id}}">{{ course.courseid}}</div>
-						{% endfor %}
-					{% else %}
-						<div> Tidak Ada </div>
-					{% endif %}
-				</div>
-            <div><b>Persentase ruangan yang dipakai :</b></div>
-            <div id="persen"></div>
-
-            </aside>
-
-        <br>
-
-        <div class="col-sm-8 col-sm-pull-4">
-            <div class="container">
-                <ul class="tab">
-                    {%  for room in allroom %}
-                    <li class="tab"><a href="#" class="tablinks" onclick="openRoom(event,'{{ room.room_id }}-{{ room.id }}')">{{ room.room_id }}</a></li>
-                    {% endfor %}
-                </ul>
-                    {%  for room in allroom %}
-                    <div id="{{ room.room_id }}-{{ room.id }}" class="tabcontent">
-                    <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
-                         <table id="{{ room.room_id }}-{{ room.id }}">
-                            <tr>
-                                <th>Time</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thrusday</th>
-                                <th>Friday</th>
-                            </tr>
-                        {% for i in time %}
-                            <tr id="{{ i }}">
-                            <th>{{ i }}:00</th>
-                            {% for day in room.validday.day %}
-                                {% if forloop.counter0 > 0 %}
-                                    {% if day and i >= room.start and i < room.end %}
-                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}" class="open">
-                                        </td>
-                                    {% else %}
-                                    <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}" class="closed">
-                                    </td>
-                                    {% endif %}
-                                {% else %}
-
-                                {% endif %}
-                            {% endfor %}
-                            </tr>
+                <aside class="col-sm-4 col-sm-push-8">
+                    <div class="Jumlah-Konflik">Jumlah Konflik : {{ conflict }}</div>
+                    <div class="Hasil-Detail">
+                        <b>Hasil Detail :</b>
+                        <br>
+                        {% for class in X.var %}
+                            <div class="id-{{ class.id }}">{{ class }}</div>
                         {% endfor %}
-
-                    </table>
                     </div>
-                    {% endfor %}
+                    <div class="invalid-course">
+                        <b> List mata kuliah yang tidak valid : </b>
+                        <br>
+                        {% if invalid_course %}
+                            {% for course in invalid_course %}
+                                <div class="invalid-{{ course.id }}">{{ course.courseid }}</div>
+                            {% endfor %}
+                        {% else %}
+                            <div> Tidak Ada</div>
+                        {% endif %}
+                    </div>
+                    <div><b>Persentase ruangan yang dipakai :</b></div>
+                    <div id="persen"></div>
+
+                </aside>
+
+                <br>
+
+                <div class="col-sm-8 col-sm-pull-4">
+                    <div class="container">
+                        <ul class="tab">
+                            {% for room in allroom %}
+                                <li class="tab"><a href="#" class="tablinks"
+                                                   onclick="openRoom(event,'{{ room.room_id }}-{{ room.id }}')">{{ room.room_id }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% for room in allroom %}
+                            <div id="{{ room.room_id }}-{{ room.id }}" class="tabcontent">
+                                <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
+                                <table id="{{ room.room_id }}-{{ room.id }}">
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thrusday</th>
+                                        <th>Friday</th>
+                                    </tr>
+                                    {% for i in time %}
+                                        <tr id="{{ i }}">
+                                            <th>{{ i }}:00</th>
+                                            {% for day in room.validday.day %}
+                                                {% if forloop.counter0 > 0 %}
+                                                    {% if day and i >= room.start and i < room.end %}
+                                                        <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}"
+                                                            class="open">
+                                                        </td>
+                                                    {% else %}
+                                                        <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}-{{ room.id }}"
+                                                            class="closed">
+                                                        </td>
+                                                    {% endif %}
+                                                {% else %}
+
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
-
+    </section>
+    <br><br>
+{% else %}
+    <p> No Output. </p>
+{% endif %}
+<footer id="footer" class="midnight-blue">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
+                               title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
+                All Rights Reserved.
+            </div>
+            <div class="col-sm-6">
+                <ul class="pull-right">
+                    <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li><!--#gototop-->
+                </ul>
+            </div>
         </div>
     </div>
-    </section>
-         <br><br>
-    {% else %}
-        <p> No Output. </p>
-    {% endif %}
-        <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li><!--#gototop-->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
+</footer><!--/#footer-->
 
-        <script src="{% static 'js/jquery.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-        <script>
-            function openRoom(evt, roomName) {
-                // Declare all variables
-                var i, tabcontent, tablinks;
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+    function openRoom(evt, roomName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
 
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
 
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
 
-                // Show the current tab, and add an "active" class to the link that opened the tab
-                document.getElementById(roomName).style.display = "block";
-                evt.currentTarget.className += " active";
+        // Show the current tab, and add an "active" class to the link that opened the tab
+        document.getElementById(roomName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    window.onload = function () {
+        var red = 0;
+        var green = 250;
+        var blue = 0;
+        var rmod = 15;
+        var gmod = 25;
+        var bmod = 20;
+        {% for course in X.var %}
+            for (j = {{ course.start }}; j <={{ course.end }}; j++) {
+                var str1 = j.toString().concat("-");
+                var day = "{{ course.day }}";
+                var str2 = day.concat("-");
+                var name = "{{ course.room }}";
+                var strhasil = str1.concat(str2, name, "-", "{{ course.roomid }}");
+                var strlama = document.getElementById(strhasil).innerHTML;
+                document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ", "{{ course.course }}", "</b>");
+                var colored = red.toString().concat(",", green.toString(), ",", blue.toString());
+                document.getElementById(strhasil).style.background = "rgb(".concat(colored, ")");
+                document.getElementById(strhasil).className = "active";
+            }
+            red = red + rmod;
+            green = green - gmod;
+            blue = blue + bmod;
+            if (blue > 210) {
+                blue = 10;
+                bmod = bmod + 5;
+            }
+            if (green < 50) {
+                green = 220;
+                gmod = gmod + 5;
+            }
+            if (red > 200) {
+                red = 30;
+                rmod = rmod + 10;
             }
 
-            window.onload=function(){
-                    var red = 0;
-                    var green = 250;
-                    var blue = 0;
-                    var rmod = 15;
-                    var gmod = 25;
-                    var bmod = 20;
-                    {% for course in X.var %}
-                        for (j = {{ course.start }}; j <={{ course.end }}; j++) {
-                            var str1 = j.toString().concat("-");
-                            var day = "{{ course.day }}";
-                            var str2 = day.concat("-");
-                            var name = "{{ course.room }}";
-                            var strhasil = str1.concat(str2,name,"-","{{ course.roomid }}");
-                            var strlama =  document.getElementById(strhasil).innerHTML;
-                            document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ","{{ course.course }}" , "</b>");
-                            var colored = red.toString().concat(",",green.toString(),",",blue.toString());
-                            document.getElementById(strhasil).style.background="rgb(".concat(colored,")");
-                            document.getElementById(strhasil).className="active";
-                        }
-                        red = red + rmod;
-                        green = green - gmod;
-                        blue = blue + bmod;
-                        if (blue > 210) {
-                            blue = 10;
-                            bmod = bmod + 5;
-                        }
-                        if (green < 50) {
-                            green = 220;
-                            gmod = gmod + 5;
-                        }
-                        if (red > 200) {
-                            red = 30;
-                            rmod = rmod + 10;
-                        }
+        {% endfor %}
 
-                    {% endfor %}
-
-                var num = $('.active').length;
-                var open = $('.open').length;
-                document.getElementById("persen").innerHTML = (num-1)/(open+num-1)*100 + "%";
+        var num = $('.active').length;
+        var open = $('.open').length;
+        document.getElementById("persen").innerHTML = (num - 1) / (open + num - 1) * 100 + "%";
 
 
-            };
-        </script>
-    </body>
+    };
+</script>
+</body>
 
 </html>
