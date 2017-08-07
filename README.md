@@ -29,8 +29,11 @@ This app have deployed to heroku. If have issue, please send me an issue. :)
 
 # Dependency
 
-* Django 1.10.1
+* Django 1.11.4
 * Python 3 or above
+* dj-database-url 0.4.2
+* dj-static 0.0.6
+* psycopg2 2.7.3
 
 # Developer
 
