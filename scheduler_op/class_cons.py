@@ -1,10 +1,10 @@
 def getrange(s1, s2, e1, e2):
     range = []
-    if (s1 > s2):
+    if s1 > s2:
         range.append(s1)
     else:
         range.append(s2)
-    if (e1 > e2):
+    if e1 > e2:
         range.append(e2)
     else:
         range.append(e1)
@@ -51,24 +51,26 @@ class room:
 
 
 class allroom:
+
+    id = 0
+    roomlist = []
+
     def __init__(self, filename, b):
         f = open(filename, 'r')
         temp = b.bacakata(f)
-        self.roomlist = []
-        while (temp != "Ruangan" and temp != ""):
+        while temp != "Ruangan" and temp != "":
             temp = b.bacakata(f)
         temp = b.bacakata(f)
-        id = 0;
-        while (temp != "Jadwal" and temp != ""):
-            r_id = temp;
+        while temp != "Jadwal" and temp != "":
+            r_id = temp
             start = b.strtojam(b.bacakata(f))
             end = b.strtojam(b.bacakata(f))
             temp = b.strtohari(b.bacakata(f))
             vday = day_bool(temp)
             x = room(id, r_id, start, end, vday)
-            (self.roomlist).append(x)
+            self.roomlist.append(x)
             temp = b.bacakata(f)
-            id += 1
+            self.id += 1
 
     def __str__(self):
         A = ""
@@ -79,15 +81,18 @@ class allroom:
     def getvalidroom(self, co):
         R = []
         for room in self.roomlist:
-            if (not room.validday.ifsameday(co.validday)):
+            if not room.validday.ifsameday(co.validday):
                 continue
             else:
                 r = getrange(room.start, co.start, room.end, co.end)
-                if (co.sks > r[1] - r[0]):
+                if co.sks > r[1] - r[0]:
                     continue
                 else:
                     R.append(room)
         return R
+
+    def maxID(self):
+        return self.id
 
 
 class course:
@@ -107,16 +112,18 @@ class course:
 
 
 class allcourse:  # kelas kuliah yang untuk konstrain kuliah
+
+    id = 0
+    courselist = []
+
     def __init__(self, filename, b):
-        id = 0
         f = open(filename, 'r')
-        self.courselist = []
         temp = b.bacakata(f)
-        while (temp != "Jadwal" and temp != ""):
+        while temp != "Jadwal" and temp != "":
             temp = b.bacakata(f)
         temp = b.bacakata(f)
-        while (temp != "Ruangan" and temp != ""):
-            courseid = temp;
+        while temp != "Ruangan" and temp != "":
+            courseid = temp
             r_cons = b.bacakata(f)
             start = b.strtojam(b.bacakata(f))
             end = b.strtojam(b.bacakata(f))
@@ -124,8 +131,8 @@ class allcourse:  # kelas kuliah yang untuk konstrain kuliah
             temp = b.strtohari(b.bacakata(f))
             vday = day_bool(temp)
             x = course(id, courseid, r_cons, start, end, sks, vday)
-            (self.courselist).append(x)
-            id += 1
+            self.courselist.append(x)
+            self.id += 1
             temp = b.bacakata(f)
 
     def __str__(self):
@@ -133,6 +140,9 @@ class allcourse:  # kelas kuliah yang untuk konstrain kuliah
         for a in self.courselist:
             A = A + str(a) + "\n"
         return A
+
+    def maxID(self):
+        return self.id
 
 
 """

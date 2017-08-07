@@ -68,24 +68,31 @@ def result(request):
 
     if docum.endswith('.txt'):
         b = Bacafile()
-        c = allcourse(docum, b)
-        a = allroom(docum, b)
-        if (methode == 1):
-            X = simulated_annealing(c, a, 0.8)
-            X.simulate()
-            # simulated anealing
-        elif (methode == 2):
-            X = genetic_algorithm(c, a, 400)
-            X.genetic_start()
-            # genetic algorithm
-        else:
-            X = hillclimbing(c, a)
-            X.start()
-            # default hill climbing
+        is_checked = b.checkFormat(docum)
+        if is_checked:
+            c = allcourse(docum, b)
+            a = allroom(docum, b)
+            if a.maxID()> 0 and c.maxID() > 0:
+                if methode == 1:
+                    X = simulated_annealing(c, a, 0.8)
+                    X.simulate()
+                    # simulated anealing
+                elif methode == 2:
+                    X = genetic_algorithm(c, a, 400)
+                    X.genetic_start()
+                    # genetic algorithm
+                else:
+                    X = hillclimbing(c, a)
+                    X.start()
+                    # default hill climbing
 
-        conflict = str(gettotalconflictpersks(X.var))
-        return render(request, 'result.html',
-                      {'X': X, 'conflict': conflict, 'allroom': a.roomlist, 'time': range(7, 18), 'day': range(1, 6),
-                       'invalid_course': invalid_course})
+                conflict = str(gettotalconflictpersks(X.var))
+                return render(request, 'result.html',
+                              {'X': X, 'conflict': conflict, 'allroom': a.roomlist, 'time': range(7, 18), 'day': range(1, 6),
+                               'invalid_course': invalid_course})
+            else:
+                return render(request, 'error.html')
+        else:
+            return render(request, 'error.html')
     else:
         return render(request, 'error.html')

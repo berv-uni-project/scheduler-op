@@ -1,3 +1,5 @@
+import re
+
 # urutan: hitungbaris(), bacakata(), convert meggnkan strtoxx()
 # nama file testcase : 'masukan.txt'            
 class Bacafile:
@@ -20,7 +22,6 @@ class Bacafile:
     # return, satu 'kata' dari file txt
     def bacakata(self, f):
         kata = ''
-        i = 0
         r = f.read(1)
         while (r == ';') or (r == '\n') or (r == ' '):
             r = f.read(1)
@@ -50,6 +51,40 @@ class Bacafile:
                 hari.append(s[i])
         return hari
 
+    def checkFormat(self, filename):
+        f = open(filename, 'r')
+        mode = 0
+        error = 0
+        r = re.compile('.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*')
+        r2 = re.compile('.*;.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*;.*')
+        for lines in f:
+            if mode == 0:
+                if lines.lower() != "ruangan":
+                    error += 1
+                mode += 1
+            elif mode == 1:
+                if not r.match(lines):
+                    error += 1
+                    mode += 1
+            elif mode == 2:
+                if lines != "":
+                    error += 1
+                mode += 1
+            elif mode == 3:
+                if lines.lower() != "jadwal":
+                    error += 1
+                mode += 1
+            elif mode == 4:
+                if not r2.match(lines):
+                    error += 1
+                    mode += 1
+            elif mode == 5:
+                if not lines != "":
+                    error += 1
+        if error > 0:
+            return False
+        else:
+            return True
 
 """
 # main, contoh
