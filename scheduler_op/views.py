@@ -83,4 +83,4 @@ def result(request):
     conflict = str(gettotalconflictpersks(X.var))
     return render(request, 'result.html',
                   {'X': X, 'conflict': conflict, 'allroom': a.roomlist, 'time': range(7, 18), 'day': range(1, 6),
-                   'invalid_course': invalid_course});
+                   'invalid_course': invalid_course})
