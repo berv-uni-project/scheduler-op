@@ -96,6 +96,3 @@ for ii in range(30):
 b = Bacafile()
 s = "neko;is;dead"
 """
-
-b = Bacafile()
-print(b.checkFormat("../doc/Testcase1.txt"))
