@@ -55,32 +55,30 @@ class Bacafile:
         f = open(filename, 'r')
         mode = 0
         error = 0
-        r = re.compile('.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*')
-        r2 = re.compile('.*;.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*;.*')
-        for lines in f:
+        r = re.compile('.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*\n')
+        r2 = re.compile('.*;.*;[0-1][0-9].[0-5][0-9];[0-1][0-9].[0-5][0-9];.*;.*\n')
+        linelist = f.readlines()
+        for lines in linelist:
             if mode == 0:
-                if lines.lower() != "ruangan":
+                if lines.lower() != "ruangan\n":
                     error += 1
                 mode += 1
             elif mode == 1:
                 if not r.match(lines):
-                    error += 1
+                    if lines != "\n":
+                        error += 1
                     mode += 1
             elif mode == 2:
-                if lines != "":
+                if lines.lower() != "jadwal\n":
                     error += 1
                 mode += 1
             elif mode == 3:
-                if lines.lower() != "jadwal":
-                    error += 1
-                mode += 1
-            elif mode == 4:
                 if not r2.match(lines):
-                    error += 1
+                    if lines != "":
+                        error += 1
                     mode += 1
-            elif mode == 5:
-                if not lines != "":
-                    error += 1
+            elif mode == 4:
+                break
         if error > 0:
             return False
         else:
@@ -94,8 +92,10 @@ r = f.read()                        # r, str(isi dari f)
 print(b.hitungbaris("Testcase.txt"))
 f = open("Testcase.txt", 'r')
 for ii in range(30):
-    print(b.bacakata(f, len(r))) """
-"""
+    print(b.bacakata(f, len(r)))
 b = Bacafile()
 s = "neko;is;dead"
 """
+
+b = Bacafile()
+print(b.checkFormat("../doc/Testcase1.txt"))
