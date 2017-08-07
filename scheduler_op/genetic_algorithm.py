@@ -1,6 +1,7 @@
 from scheduler_op.hill_climbing import *
 import random
 
+
 class genetic_algorithm:
     def __init__(self, coursel, rooml, nString):
         self.all_strings = []
@@ -16,47 +17,46 @@ class genetic_algorithm:
             i += 1
 
     def cross_over(self, n, index1, index2):
-        #n adalah nomor index pemotongan (misal n = 1, index dipotong setelah variabel ke 1)
-        #I.S : 2 string of variabel
-        #F.S : string variabel keduanya dipotong dan ditukar (cross over)
+        # n adalah nomor index pemotongan (misal n = 1, index dipotong setelah variabel ke 1)
+        # I.S : 2 string of variabel
+        # F.S : string variabel keduanya dipotong dan ditukar (cross over)
         set_of_var1 = self.all_strings[index1]
         set_of_var2 = self.all_strings[index2]
         if (index1 != index2):
             i = 0
-            while i <= n :
+            while i <= n:
                 temp_var1 = set_of_var1.pop(i)
                 temp_var2 = set_of_var2.pop(i)
-                set_of_var1.insert(i,temp_var2)
-                set_of_var2.insert(i,temp_var1)
+                set_of_var1.insert(i, temp_var2)
+                set_of_var2.insert(i, temp_var1)
                 i += 1
 
     def fitness_function(self, index):
-        #fitness function nya adalah jumlah variabel yang tidak ada comflict
-        #caranya dengan total variabel - totalconflict variabel tersebut
+        # fitness function nya adalah jumlah variabel yang tidak ada comflict
+        # caranya dengan total variabel - totalconflict variabel tersebut
         return len(self.all_strings[0]) - gettotalconflict(self.all_strings[index])
 
     def selection(self):
-        #I.S string of variabel
-        #F.S kirim indeks variabel yang mau ditukar
+        # I.S string of variabel
+        # F.S kirim indeks variabel yang mau ditukar
         i = 0
         total_fitness = 0
         for str_var in self.all_strings:
             self.str_fitness.append(self.fitness_function(i))
             total_fitness += self.str_fitness[i]
             i += 1
-        ran = random.uniform(0,1)
+        ran = random.uniform(0, 1)
         i = 0
         while (ran > 0):
             ran = ran - self.str_fitness[i]
             i += 1
         return i - 1
 
-
     def mutation(self, index):
-        #I.S string dengan index tersebut akan diambil set of variabelnya
-        #F.S satu variabel dari set of variabel diubah (pemilihan variabel secara random)
+        # I.S string dengan index tersebut akan diambil set of variabelnya
+        # F.S satu variabel dari set of variabel diubah (pemilihan variabel secara random)
         self.all_strings[index]
-        ran = random.randrange(0,len(self.all_strings[index]) - 1)
+        ran = random.randrange(0, len(self.all_strings[index]) - 1)
         endloop = False
         loop = 0
         ran = random
@@ -68,7 +68,7 @@ class genetic_algorithm:
             while var_temp.var[i].id != vary.change.id:
                 i += 1
                 if (i == len(var_temp.var)):
-                    i = i-1;
+                    i = i - 1;
                     break;
             var_temp.var[i].start = vary.change.start
             var_temp.var[i].end = vary.change.end
@@ -79,10 +79,10 @@ class genetic_algorithm:
             if (gettotalconflictpersks(var_temp.var) < gettotalconflictpersks(self.all_strings[index])) or \
                     (loop >= len(self.action) - 2):
                 k = 0
-                while self.all_strings[index][k].id!= vary.change.id:
+                while self.all_strings[index][k].id != vary.change.id:
                     k += 1
                     if (k == len(self.all_strings[index])):
-                        k=k-1;
+                        k = k - 1;
                         break;
 
                 self.all_strings[index][k].start = vary.change.start
@@ -94,18 +94,18 @@ class genetic_algorithm:
             loop += 1
 
     def genetic_start(self):
-        #run genetic algorithm
-        #mengembalikan index yang terbaik
+        # run genetic algorithm
+        # mengembalikan index yang terbaik
         move = 0
         treshold = 500
         varlen = len(self.all_strings[0])
         end = False
         while (move < treshold) and (end == False):
             ran = random
-            if (ran.uniform(0,1) <= 0.6):
+            if (ran.uniform(0, 1) <= 0.6):
                 idx_str1 = self.selection()
-                idx_str2= self.selection()
-                self.cross_over(ran.randrange(0,varlen - 1),idx_str1,idx_str2)
+                idx_str2 = self.selection()
+                self.cross_over(ran.randrange(0, varlen - 1), idx_str1, idx_str2)
             else:
                 idx_str = self.selection()
                 self.mutation(idx_str)
@@ -129,9 +129,10 @@ class genetic_algorithm:
                     self.idx = i
                 i += 1
 
-       # for v in self.all_strings[self.idx]:
-      #      print(v)
-     #   print(str(gettotalconflictpersks(self.all_strings[self.idx])))
+                # for v in self.all_strings[self.idx]:
+                #      print(v)
+                #   print(str(gettotalconflictpersks(self.all_strings[self.idx])))
+
 
 """
 #main test

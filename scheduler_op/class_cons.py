@@ -1,14 +1,15 @@
-def getrange(s1,s2,e1,e2):
+def getrange(s1, s2, e1, e2):
     range = []
-    if(s1 > s2):
+    if (s1 > s2):
         range.append(s1)
     else:
         range.append(s2)
-    if(e1 > e2):
+    if (e1 > e2):
         range.append(e2)
     else:
         range.append(e1)
     return range
+
 
 class day_bool:
     def __init__(self, validday):
@@ -28,10 +29,12 @@ class day_bool:
             if self.day[i] and self2.day[i]:
                 r.append(i)
         return r
+
     def ifsameday(self, self2):
         for i in [1, 2, 3, 4, 5]:
             if self.day[i] and self2.day[i]:
                 return True
+
 
 class room:
     def __init__(self, id, rid, start, end, vday):
@@ -65,16 +68,16 @@ class allroom:
             x = room(id, r_id, start, end, vday)
             (self.roomlist).append(x)
             temp = b.bacakata(f)
-            id = id + 1;
+            id += 1
 
     def __str__(self):
         A = ""
         for a in self.roomlist:
             A = A + str(a) + "\n"
         return A
-    
+
     def getvalidroom(self, co):
-        R=[]
+        R = []
         for room in self.roomlist:
             if (not room.validday.ifsameday(co.validday)):
                 continue
@@ -130,6 +133,7 @@ class allcourse:  # kelas kuliah yang untuk konstrain kuliah
         for a in self.courselist:
             A = A + str(a) + "\n"
         return A
+
 
 """
 # Test
