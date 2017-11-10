@@ -38,7 +38,7 @@ class day_bool:
 
 class room:
     def __init__(self, id, rid, start, end, vday):
-        self.id = id;
+        self.id = id
         self.room_id = rid
         self.start = start
         self.end = end
@@ -56,6 +56,7 @@ class allroom:
     roomlist = []
 
     def __init__(self, filename, b):
+        self.roomlist.clear()
         f = open(filename, 'r')
         temp = b.bacakata(f)
         while temp != "Ruangan" and temp != "":
@@ -117,6 +118,7 @@ class allcourse:  # kelas kuliah yang untuk konstrain kuliah
     courselist = []
 
     def __init__(self, filename, b):
+        self.courselist.clear()
         f = open(filename, 'r')
         temp = b.bacakata(f)
         while temp != "Jadwal" and temp != "":

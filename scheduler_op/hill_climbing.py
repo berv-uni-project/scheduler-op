@@ -47,7 +47,7 @@ def initialize(coursel, rooml):
                     continue
                 else:
                     r = getrange(room.start, co.start, room.end, co.end)
-                    if (co.sks > r[1] - r[0]):
+                    if co.sks > r[1] - r[0]:
                         continue
                     else:
                         R.append(room)
@@ -90,7 +90,7 @@ def getallaction(coursel, rooml):
                     r = getrange(room.start, co.start, room.end, co.end)
                     begin = r[0]
                     end = r[1] - co.sks + 1
-                    if (end >= begin):
+                    if end >= begin:
                         for i in range(begin, end):
                             s = i
                             e = i + co.sks - 1
@@ -179,10 +179,8 @@ class CSPvar(object):
             if self.roomid == cspvar2.roomid:
                 if self.day == cspvar2.day:
                     if ((self.start >= cspvar2.start) and (self.start <= cspvar2.end)):
-                        # print('masuk 1 end', cspvar2.end, ' start ', self.start, ' jadi ', cspvar2.end - self.start + 1)
                         return cspvar2.end - self.start + 1
                     elif ((cspvar2.start >= self.start) and (cspvar2.start <= self.end)):
-                        # print('masuk 2 end', self.end, ' start ', cspvar2.start, ' jadi ', self.end - cspvar2.start + 1)
                         return self.end - cspvar2.start + 1
                     else:
                         return 0
@@ -251,7 +249,7 @@ class hillclimbing:
                     idx = j
                 j += 1
             i = 0
-            if (idx != 0):
+            if idx != 0:
                 while self.var[i].id != self.action[idx].change.id:
                     i += 1
                     if (i == len(self.var)):
@@ -264,7 +262,7 @@ class hillclimbing:
                 self.var[i].roomid = self.action[idx].change.roomid
                 count = count + 1
             else:
-                count = 500;
+                count = 500
 
 
 """

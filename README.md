@@ -10,22 +10,7 @@ This is scheduler or timetabling that implements 3 algorithm. This web app using
 
 Link : https://scheduler-op.herokuapp.com/
 
-This app have deployed to heroku. If have issue, please send me an issue. :)
-
-# Screenshot of Program
-
-## Home Page
-![Home](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-home.png "Home Page")
-
-## About Page
-![About](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-about.png "About Page")
-
-## Sample Result
-![Sample Result](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-result.png "Result Page")
-
-# Reference
-
-* Web Template : http://www.free-css.com/free-css-templates/page202/flat-theme
+This app have deployed to heroku. If have some issue, please send me an issue. :)
 
 # Dependency
 

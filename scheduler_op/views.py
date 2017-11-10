@@ -10,6 +10,7 @@ from scheduler_op.genetic_algorithm import *
 from scheduler_op.simulated_annealing import *
 from .forms import UploadFileForm
 from .models import Document
+from .contributor import Contributor
 
 
 # render home page
@@ -44,7 +45,18 @@ def list(request):
 
 # render about page
 def about(request):
-    return render(request, 'about.html')
+    contributors = []
+    bervi = Contributor(name='Bervianto Leo Pratama', nim=13514047, image='images/bervi-135.jpg',facebook='https://facebook.com/bervianto.leo', github='https://github.com/berviantoleo', linkedin='https://www.linkedin.com/in/bervianto-leo-pratama')
+    jeje = Contributor(name='Jeremia Jason Lasiman', nim=13514021, image='images/jeje-135.jpg')
+    zahid = Contributor(name='M. Az-zahid Adhitya S.', nim=13514095, image='images/zahid-135.jpg')
+    richard = Contributor(name='Richard Wellianto', nim=13514051, image='images/richard-135.jpg')
+    amir = Contributor(name='Amir', nim=13514017, image='images/amir-135.jpg')
+    contributors.append(amir)
+    contributors.append(jeje)
+    contributors.append(bervi)
+    contributors.append(richard)
+    contributors.append(zahid)
+    return render(request, 'about.html', {'contributors': contributors})
 
 
 # transient page

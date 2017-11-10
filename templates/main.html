@@ -7,95 +7,78 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>{% block title %}Scheduler OP{% endblock %}</title>
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
-    <!--[if lt IE 9]>
-        <script src="{% static 'js/html5shiv.js' %}"></script>
-        <script src="{% static 'js/respond.min.js' %}"></script>
-        <![endif]-->
-    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
-
-    <style>
-        h2 {
-            border-bottom: 3px solid;
-            line-height: 1.75em;
-            padding-bottom: 8px;
-            text-align: center;
-            width: 100%;
-        }
-
-        form.upload-file {
-            margin: 0 auto;
-            width: 200px;
-        }
-
-        li.list-file {
-            text-align: center;
-        }
-
-        p.list-file {
-            text-align: center;
-        }
-
-        img.logo {
-            width: 198px;
-            height: 42px;
-        }
-    </style>
-
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/ionicons.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
 </head>
 
 <body>
-{% block navbar %}
-    <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about-us/">About Us</a></li>
+
+<header>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="teal darken-4 nav-wrapper">
+                <a href="/" class="brand-logo">
+                    Scheduler OP
+                </a>
+                <a href="#" data-activates="sidenav-data" class="button-collapse"><i class="icon ion-navicon"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    {% block navbar %}
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about-us/">About Us</a></li>
+                    {% endblock %}
                 </ul>
             </div>
-        </div>
-    </header>
-{% endblock %}
-<div id="content">
+        </nav>
+    </div>
+
+    <ul id="sidenav-data" class="side-nav">
+        {% block sidebar %}
+            <li><a href="/">Home</a></li>
+            <li><a href="/about-us/">About Us</a></li>
+        {% endblock %}
+    </ul>
+</header>
+
+<div class="container">
     {% block content %}
     {% endblock %}
 </div>
 
-<footer id="footer" class="midnight-blue">
+<footer class="teal darken-3 page-footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-                               title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-                All Rights Reserved.
+            <div class="col l6 s12">
+                <h5 class="white-text">Github Repository</h5>
+                <a class="btn" href="https://github.com/berviantoleo/scheduler-op"><i class="icon ion-social-github"></i></a>
             </div>
-            <div class="col-sm-6">
-                <ul class="pull-right">
-                    <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li><!--#gototop-->
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Quick Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="/">Home</a></li>
+                    <li><a class="grey-text text-lighten-3" href="/about-us/">About Us</a></li>
                 </ul>
             </div>
         </div>
     </div>
-</footer><!--/#footer-->
+    <div class="teal darken-4 footer-copyright">
+        <div class="container">
+            © 2017 Bervianto Leo P
+        </div>
+    </div>
+</footer>
 
-<script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+    $(".button-collapse").sideNav();
+</script>
+
 {% block additionalscript %}
 {% endblock %}
+
 </body>
 
 </html>

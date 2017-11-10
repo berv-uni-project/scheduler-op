@@ -3,106 +3,40 @@
 {% load static %}
 
 {% block navbar %}
-    <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img class="logo" src="{% static 'images/logo.png' %}" alt="logo"></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Home</a></li>
-                    <li class="active"><a href="/about-us/">About Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/about-us/">About Us</a></li>
+{% endblock %}
+
+{% block sidebar %}
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/about-us/">About Us</a></li>
 {% endblock %}
 
 {% block title %}Scheduler OP - About Us{% endblock %}
 
 {% block content %}
-    <section id="about-us" class="container">
+    <div class="row">
         <h1 class="center">Meet the Team</h1>
-        <p class="lead center">This web application created by : </p>
-        <div class="gap"></div>
-        <div id="meet-the-team" class="row">
-            <div class="col-md-3 col-xs-6">
-                <div class="center">
-                    <p><img id="amir" class="img-responsive img-thumbnail img-circle"
-                            src="{% static 'images/amir-135.jpg' %}" alt=""></p>
-                    <h5>Amir
-                        <small class="designation muted">13514017</small>
-                    </h5>
-                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a
-                        class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a
-                        class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a
-                        class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
+        <p class="center">This web application created by : </p>
+        <div class="row">
+            {% for contributor in contributors %}
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img id="{{ contributor.name }}" src="{% static contributor.image %}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title center">{{ contributor.name }}</span>
+                        <p class="center">{{ contributor.nim }}</p>
+                    </div>
+                    <div class="card-action center">
+                        <a class="btn" href="{{ contributor.facebook }}"><i class="icon ion-social-facebook"></i></a>
+                        <a class="btn" href="{{ contributor.linkedin }}"><i class="icon ion-social-linkedin"></i></a>
+                        <a class="btn" href="{{ contributor.github }}"><i class="icon ion-social-github"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="center">
-                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/jeje-135.jpg' %}"
-                            alt="">
-                    </p>
-                    <h5>Jeremia Jason Lasiman
-                        <small class="designation muted">13514021</small>
-                    </h5>
-                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a
-                        class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a
-                        class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a
-                        class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="center">
-                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/bervi-135.jpg' %}"
-                            alt=""></p>
-                    <h5>Bervianto Leo Pratama
-                        <small class="designation muted">13514047</small>
-                    </h5>
-                    <a class="btn btn-social btn-facebook" href="https://www.facebook.com/bervianto.leo"><i
-                            class="icon-facebook"></i></a> <a class="btn btn-social btn-google-plus"
-                                                              href="https://plus.google.com/u/0/+BerviantoLeoPratama"><i
-                        class="icon-google-plus"></i></a> <a class="btn btn-social btn-twitter"
-                                                             href="https://twitter.com/berviantoleo"><i
-                        class="icon-twitter"></i></a> <a class="btn btn-social btn-linkedin"
-                                                         href="https://www.linkedin.com/in/bervianto-pratama-360b51118"><i
-                        class="icon-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="center">
-                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/richard-135.jpg' %}"
-                            alt=""></p>
-                    <h5>Richard Wellianto
-                        <small class="designation muted">13514051</small>
-                    </h5>
-                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a
-                        class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a
-                        class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a
-                        class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="center">
-                    <p><img class="img-responsive img-thumbnail img-circle" src="{% static 'images/zahid-135.jpg' %}"
-                            alt=""></p>
-                    <h5>M. Az-zahid Adhitya Silparensi
-                        <small class="designation muted">13514095</small>
-                    </h5>
-                    <a class="btn btn-social btn-facebook" href="#"><i class="icon-facebook"></i></a> <a
-                        class="btn btn-social btn-google-plus" href="#"><i class="icon-google-plus"></i></a> <a
-                        class="btn btn-social btn-twitter" href="#"><i class="icon-twitter"></i></a> <a
-                        class="btn btn-social btn-linkedin" href="#"><i class="icon-linkedin"></i></a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-    </section>
-
+    </div>
 {% endblock %}

@@ -22,7 +22,7 @@ class genetic_algorithm:
         # F.S : string variabel keduanya dipotong dan ditukar (cross over)
         set_of_var1 = self.all_strings[index1]
         set_of_var2 = self.all_strings[index2]
-        if (index1 != index2):
+        if index1 != index2:
             i = 0
             while i <= n:
                 temp_var1 = set_of_var1.pop(i)
@@ -47,7 +47,7 @@ class genetic_algorithm:
             i += 1
         ran = random.uniform(0, 1)
         i = 0
-        while (ran > 0):
+        while ran > 0:
             ran = ran - self.str_fitness[i]
             i += 1
         return i - 1
@@ -67,9 +67,9 @@ class genetic_algorithm:
             i = 0
             while var_temp.var[i].id != vary.change.id:
                 i += 1
-                if (i == len(var_temp.var)):
-                    i = i - 1;
-                    break;
+                if i == len(var_temp.var):
+                    i = i - 1
+                    break
             var_temp.var[i].start = vary.change.start
             var_temp.var[i].end = vary.change.end
             var_temp.var[i].day = vary.change.day
@@ -82,8 +82,8 @@ class genetic_algorithm:
                 while self.all_strings[index][k].id != vary.change.id:
                     k += 1
                     if (k == len(self.all_strings[index])):
-                        k = k - 1;
-                        break;
+                        k = k - 1
+                        break
 
                 self.all_strings[index][k].start = vary.change.start
                 self.all_strings[index][k].end = vary.change.end
@@ -102,7 +102,7 @@ class genetic_algorithm:
         end = False
         while (move < treshold) and (end == False):
             ran = random
-            if (ran.uniform(0, 1) <= 0.6):
+            if ran.uniform(0, 1) <= 0.6:
                 idx_str1 = self.selection()
                 idx_str2 = self.selection()
                 self.cross_over(ran.randrange(0, varlen - 1), idx_str1, idx_str2)
@@ -121,10 +121,10 @@ class genetic_algorithm:
             move += 1
 
         totalconflict = gettotalconflictpersks(self.all_strings[self.idx])
-        if (totalconflict > 0):
+        if totalconflict > 0:
             i = 0
             for var in self.all_strings:
-                if (gettotalconflictpersks(var) < totalconflict):
+                if gettotalconflictpersks(var) < totalconflict:
                     totalconflict = gettotalconflictpersks(var)
                     self.idx = i
                 i += 1

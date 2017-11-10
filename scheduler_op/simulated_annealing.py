@@ -6,13 +6,13 @@ import random
 class simulated_annealing:
     def __init__(self, coursel, rooml, ratio):
         self.var = initialize(coursel, rooml)
-        self.tempnow = 100;
-        self.ratio = ratio;
-        self.conflict = [];
+        self.tempnow = 100
+        self.ratio = ratio
+        self.conflict = []
         self.action = getallaction(coursel, rooml)
 
     def decrease_temperature(self):
-        self.tempnow = self.tempnow * self.ratio;
+        self.tempnow = self.tempnow * self.ratio
 
     def simulate(self):
         i = 0
@@ -31,7 +31,7 @@ class simulated_annealing:
         idx = 0
         j = 0
         loop = 0
-        while (gettotalconflictpersks(self.var) > 0 and loop < 100):
+        while gettotalconflictpersks(self.var) > 0 and loop < 100:
             for act in self.action:
                 var_temp = CSPvarlist(self.var)
                 i = 0
@@ -51,12 +51,12 @@ class simulated_annealing:
                 j += 1
                 k = 0
 
-                if (idx != 0):
+                if idx != 0:
                     while self.var[k].id != self.action[idx].change.id:
                         k += 1
-                        if (k == len(self.var)):
-                            k = k - 1;
-                            break;
+                        if k == len(self.var):
+                            k = k - 1
+                            break
 
                     self.var[k].start = self.action[idx].change.start
                     self.var[k].end = self.action[idx].change.end
