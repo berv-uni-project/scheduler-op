@@ -15,13 +15,13 @@ This app have deployed to heroku. If have issue, please send me an issue. :)
 # Screenshot of Program
 
 ## Home Page
-![Home](https://github.com/berviantoleo/scheduler-op/raw/master/doc/screenshot/sc-home.png "Home Page")
+![Home](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-home.png "Home Page")
 
 ## About Page
-![About](https://github.com/berviantoleo/scheduler-op/raw/master/doc/screenshot/sc-about.png "About Page")
+![About](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-about.png "About Page")
 
 ## Sample Result
-![Sample Result](https://github.com/berviantoleo/scheduler-op/raw/master/doc/screenshot/sc-result.png "Result Page")
+![Sample Result](https://github.com/berviantoleo/scheduler-op/raw/master/docs/screenshot/sc-result.png "Result Page")
 
 # Reference
 

@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn untitled.wsgi
+web: gunicorn scheduler.wsgi
