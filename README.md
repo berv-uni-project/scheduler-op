@@ -14,11 +14,13 @@ This app have deployed to heroku. If have some issue, please send me an issue. :
 
 # Dependency
 
-* Django 1.11.4
+Look at [Requirements.txt](./requirements.txt).
+
+* Django 2.1
 * Python 3 or above
-* dj-database-url 0.4.2
+* dj-database-url 0.5.0
 * dj-static 0.0.6
-* psycopg2 2.7.3
+* psycopg2 2.7.5
 
 # Developer
 
