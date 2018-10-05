@@ -1,5 +1,7 @@
 # Scheduler OP
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/384d23564c1d46e9b6d55999e0c91608)](https://app.codacy.com/app/berviantoleo/scheduler-op?utm_source=github.com&utm_medium=referral&utm_content=berv-uni-project/scheduler-op&utm_campaign=Badge_Grade_Settings)
+
 This is scheduler or timetabling that implements 3 algorithm. This web app using simple interface.
 
 1. Hill Climbing
