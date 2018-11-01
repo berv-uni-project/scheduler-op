@@ -4,4 +4,4 @@ Django==2.1.2
 gunicorn==19.9.0
 psycopg2==2.7.5
 six==1.11.0
-virtualenv==16.0.0
+virtualenv==16.1.0
