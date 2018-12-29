@@ -3,111 +3,127 @@
 {% block title %}Scheduler OP - Result{% endblock %}
 
 {% block content %}
-    {% if X %}
-        <div class="row">
-            <div class="card col s12 m9 left">
-                <ul class="tabs">{% for room in allroom %}
-                    <li class="tab col s3"><a href="#{{ room.room_id }}">{{ room.room_id }}</a></li>{% endfor %}
-                </ul>
-                {% for room in allroom %}
-                    <div id="{{ room.room_id }}" class="col s12">
-                        <h3>Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
-                        <table class="highlight bordered responsive-table" id="{{ room.room_id }}-{{ room.id }}">
-                            <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thrusday</th>
-                                <th>Friday</th>
-                            </tr>
-                            </thead>{% for i in time %}
-                                <tr id="{{ i }}">
-                                    <th>{{ i }}:00</th>{% for day in room.validday.day %}{% if forloop.counter0 > 0 %}{% if day and i >= room.start and i < room.end %}
-                                        <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open"></td>{% else %}
-                                        <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed"></td>{% endif %}{% else %}{% endif %}{% endfor %}
-                                </tr>{% endfor %}
-                        </table>
-                    </div>
+{% if X %}
+<div class="columns">
+  <div class="card column is-four-fifths">
+    <b-tabs position="is-centered" class="block">
+      {% for room in allroom %}
+      <b-tab-item label="{{ room.room_id }}">
+        <div class="content" id="{{ room.room_id }}" class="col s12">
+          <h3 class="title">Jadwal Matakuliah di Ruangan {{ room.room_id }}</h3>
+          <div class="table__wrapper">
+            <table class="table is-bordered is-fullwidth" id="{{ room.room_id }}-{{ room.id }}">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Monday</th>
+                  <th>Tuesday</th>
+                  <th>Wednesday</th>
+                  <th>Thursday</th>
+                  <th>Friday</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for i in time %}
+              <tr id="{{ i }}">
+                <td><b>{{ i }}:00</b></td>
+                {% for day in room.validday.day %}
+                  {% if forloop.counter0 > 0 %}
+                    {% if day and i >= room.start and i < room.end %}
+                      <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open"></td>
+                    {% else %}
+                      <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed"></td>
+                    {% endif %}
+                  {% else %}
+                  {% endif %}
                 {% endfor %}
-            </div>
-            <div class="card col s12 m2 right">
-                <p class="Jumlah-Konflik">Jumlah Konflik : {{ conflict }}</p>
-                <div class=" row Hasil-Detail">
-                    <b>Hasil Detail :</b>{% for class in X.var %}
-                        <p>{{ class }}</p>{% endfor %}
-                </div>
-                <div class="row invalid-course">
-                    <b> List mata kuliah yang tidak valid : </b>{% if invalid_course %}
-                        <ul>{% for course in invalid_course %}
-                            <li>{{ course.courseid }}</li>{% endfor %}
-                        </ul>{% else %}
-                        <p> Tidak Ada</p>{% endif %}
-                </div>
-                <p><b>Persentase ruangan yang dipakai :</b></p>
-                <div id="persen"></div>
-            </div>
+                </tr>
+              {% endfor %}
+            </tbody>
+              </table>
+          </div>
         </div>
+      </b-tab-item>
+      {% endfor %}
+    </b-tabs>
+  </div>
+  <div class="card column is-one-fifths">
+    <div class="content">
+      <h4 class="subtitle">Jumlah Konflik : {{ conflict }}</h4>
+      <div>
+        <h5 class="subtitle">Hasil Detail :</h5>
+        <ul>
+          {% for class in X.var %}
+          <li>{{ class }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <p><h5 class="subtitle"> List mata kuliah yang tidak valid : </h5></p>
+        {% if invalid_course %}
+          <ul>
+            {% for course in invalid_course %}
+              <li>{{ course.courseid }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p> Tidak Ada</p>
+        {% endif %}
+      </div>
+      <p><h5 class="subtitle">Persentase ruangan yang dipakai :</h5></p>
+      <div id="persen"></div>
+    </div>
 
-
-        <br><br>
-    {% else %}
-        <h1> No Output. </h1>
-    {% endif %}
+  </div>
+</div>
+{% else %}
+<h1> No Output. </h1>
+{% endif %}
 
 {% endblock %}
 {% block additionalscript %}
-    <script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var red = 0;
+    var green = 250;
+    var blue = 0;
+    var rmod = 15;
+    var gmod = 25;
+    var bmod = 20;
+    {% for course in X.var %}
+    for (let j = {{ course.start }}; j <= {{ course.end }}; j++) {
+      var strhasil = `${j}-{{ course.day }}-{{ course.room }}`;
+      console.log(strhasil);
+      var strlama = document.getElementById(strhasil).innerHTML;
+      document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ", "{{ course.course }}", "</b>");
+      var colored = red.toString().concat(",", green.toString(), ",", blue.toString());
+      document.getElementById(strhasil).style.background = "rgb(".concat(colored, ")");
+      document.getElementById(strhasil).className = "active";
+    }
+    red = red + rmod;
+    green = green - gmod;
+    blue = blue + bmod;
+    if (blue > 210) {
+      blue = 10;
+      bmod = bmod + 5;
+    }
+    if (green < 50) {
+      green = 220;
+      gmod = gmod + 5;
+    }
+    if (red > 200) {
+      red = 30;
+      rmod = rmod + 10;
+    }
 
-        window.onload = function () {
-            var red = 0;
-            var green = 250;
-            var blue = 0;
-            var rmod = 15;
-            var gmod = 25;
-            var bmod = 20;
-            {% for course in X.var %}
-                for (j = {{ course.start }}; j <={{ course.end }}; j++) {
-                    var str1 = j.toString().concat("-");
-                    var day = "{{ course.day }}";
-                    var str2 = day.concat("-");
-                    var name = "{{ course.room }}";
-                    var strhasil = str1.concat(str2, name, "-", "{{ course.roomid }}");
-                    var strlama = document.getElementById(strhasil).innerHTML;
-                    document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ", "{{ course.course }}", "</b>");
-                    var colored = red.toString().concat(",", green.toString(), ",", blue.toString());
-                    document.getElementById(strhasil).style.background = "rgb(".concat(colored, ")");
-                    document.getElementById(strhasil).className = "active";
-                }
-                red = red + rmod;
-                green = green - gmod;
-                blue = blue + bmod;
-                if (blue > 210) {
-                    blue = 10;
-                    bmod = bmod + 5;
-                }
-                if (green < 50) {
-                    green = 220;
-                    gmod = gmod + 5;
-                }
-                if (red > 200) {
-                    red = 30;
-                    rmod = rmod + 10;
-                }
+    {% endfor %}
 
-            {% endfor %}
+    var num = document.getElementsByClassName('.active').length;
+    var open = document.getElementsByClassName('.open').length;
+    document.getElementById("persen").innerHTML = (num - 1) / (open + num - 1) * 100 + "%";
 
-            var num = $('.active').length;
-            var open = $('.open').length;
-            document.getElementById("persen").innerHTML = (num - 1) / (open + num - 1) * 100 + "%";
+  });
 
-
-        };
-
-        $(document).ready(function () {
-            $('ul.tabs').tabs();
-        });
-    </script>
+</script>
 
 {% endblock %}

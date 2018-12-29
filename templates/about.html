@@ -2,41 +2,46 @@
 
 {% load static %}
 
-{% block navbar %}
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/about-us/">About Us</a></li>
-{% endblock %}
-
-{% block sidebar %}
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/about-us/">About Us</a></li>
-{% endblock %}
-
 {% block title %}Scheduler OP - About Us{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h1 class="center">Meet the Team</h1>
-        <p class="center">This web application created by : </p>
-        <div class="row">
-            {% for contributor in contributors %}
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img id="{{ contributor.name }}" src="{% static contributor.image %}">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title center">{{ contributor.name }}</span>
-                        <p class="center">{{ contributor.nim }}</p>
-                    </div>
-                    <div class="card-action center">
-                        <a class="btn" href="{{ contributor.facebook }}"><i class="icon ion-social-facebook"></i></a>
-                        <a class="btn" href="{{ contributor.linkedin }}"><i class="icon ion-social-linkedin"></i></a>
-                        <a class="btn" href="{{ contributor.github }}"><i class="icon ion-social-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+<h1 class="title">Meet the Team</h1>
+
+<p class="subtitle">This web application created by : </p>
+<div class="columns is-multiline">
+  {% for contributor in contributors %}
+  <div class="column is-one-third">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image">
+          <img id="{{ contributor.name }}" src="{% static contributor.image %}">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="content has-text-centered">
+          <h5 class="title">{{ contributor.name }}</h5>
+          <h6 class="subtitle">{{ contributor.nim }}</h6>
+          <div class="buttons">
+            <a class="button" href="{{ contributor.facebook }}">
+              <span class="icon">
+                <i class="fab fa-facebook"></i>
+              </span>
+            </a>
+            <a class="button" href="{{ contributor.linkedin }}">
+              <span class="icon">
+                <i class="fab fa-linkedin"></i>
+              </span>
+            </a>
+            <a class="button" href="{{ contributor.github }}">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
