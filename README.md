@@ -1,6 +1,7 @@
 # Scheduler OP
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/384d23564c1d46e9b6d55999e0c91608)](https://app.codacy.com/app/berviantoleo/scheduler-op?utm_source=github.com&utm_medium=referral&utm_content=berv-uni-project/scheduler-op&utm_campaign=Badge_Grade_Settings)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fberv-uni-project%2Fscheduler-op.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fberv-uni-project%2Fscheduler-op?ref=badge_shield)
 
 This is scheduler or timetabling that implements 3 algorithm. This web app using simple interface.
 
@@ -81,3 +82,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fberv-uni-project%2Fscheduler-op.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fberv-uni-project%2Fscheduler-op?ref=badge_large)
