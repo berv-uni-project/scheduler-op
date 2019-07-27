@@ -6,7 +6,7 @@ RUN apk add --no-cache \
     python3-dev \
     musl-dev \
     postgresql-dev \
-    && pip install --no-cache-dir psycopg2
+    && pip install --no-cache-dir psycopg2==2.8
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 COPY . /app/
