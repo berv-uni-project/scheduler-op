@@ -4,12 +4,11 @@ from django.db import models
 from django.conf import settings
 
 import os
-
+import uuid
 
 # Create your models here.
-
 class Document(models.Model):
-    docfile = models.FileField(upload_to='documents/')
+    docfile = models.FileField(upload_to='documents/{}/'.format(uuid.uuid4()))
 
     def delete(self, *args, **kwargs):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
