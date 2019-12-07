@@ -24,23 +24,23 @@
                 </tr>
               </thead>
               <tbody>
-              {% for i in time %}
-              <tr id="{{ i }}">
-                <td><b>{{ i }}:00</b></td>
-                {% for day in room.validday.day %}
+                {% for i in time %}
+                <tr id="{{ i }}">
+                  <td><b>{{ i }}:00</b></td>
+                  {% for day in room.validday.day %}
                   {% if forloop.counter0 > 0 %}
-                    {% if day and i >= room.start and i < room.end %}
-                      <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open"></td>
-                    {% else %}
-                      <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed"></td>
-                    {% endif %}
+                  {% if day and i >= room.start and i < room.end %}
+                  <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="open"></td>
+                  {% else %}
+                  <td id="{{ i }}-{{ forloop.counter0 }}-{{ room.room_id }}" class="closed"></td>
+                  {% endif %}
                   {% else %}
                   {% endif %}
-                {% endfor %}
+                  {% endfor %}
                 </tr>
-              {% endfor %}
-            </tbody>
-              </table>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </b-tab-item>
@@ -59,18 +59,22 @@
         </ul>
       </div>
       <div>
-        <p><h5 class="subtitle"> List mata kuliah yang tidak valid : </h5></p>
+        <p>
+          <h5 class="subtitle"> List mata kuliah yang tidak valid : </h5>
+        </p>
         {% if invalid_course %}
-          <ul>
-            {% for course in invalid_course %}
-              <li>{{ course.courseid }}</li>
-            {% endfor %}
-          </ul>
+        <ul>
+          {% for course in invalid_course %}
+          <li>{{ course.courseid }}</li>
+          {% endfor %}
+        </ul>
         {% else %}
-          <p> Tidak Ada</p>
+        <p> Tidak Ada</p>
         {% endif %}
       </div>
-      <p><h5 class="subtitle">Persentase ruangan yang dipakai :</h5></p>
+      <p>
+        <h5 class="subtitle">Persentase ruangan yang dipakai :</h5>
+      </p>
       <div id="persen"></div>
     </div>
 
@@ -83,44 +87,69 @@
 {% endblock %}
 {% block additionalscript %}
 <script>
+  function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function lightOrDark(color) {
+    // Variables for red, green, blue values
+    var r, g, b, hsp;
+    // Check the format of the color, HEX or RGB?
+    if (color.match(/^rgb/)) {
+      // If HEX --> store the red, green, blue values in separate variables
+      color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+      r = color[1];
+      g = color[2];
+      b = color[3];
+    }
+    else {
+      // If RGB --> Convert it to HEX: http://gist.github.com/983661
+      color = +("0x" + color.slice(1).replace(
+        color.length < 5 && /./g, '$&$&'));
+      r = color >> 16;
+      g = color >> 8 & 255;
+      b = color & 255;
+    }
+    // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
+    hsp = Math.sqrt(
+      0.299 * (r * r) +
+      0.587 * (g * g) +
+      0.114 * (b * b)
+    );
+    // Using the HSP value, determine whether the color is light or dark
+    if (hsp > 127.5) {
+      // light
+      return '#000000';
+    }
+    else {
+      // dark
+      return '#FFFFFF';
+    }
+  }
   window.addEventListener('DOMContentLoaded', function () {
-    var red = 0;
-    var green = 250;
-    var blue = 0;
-    var rmod = 15;
-    var gmod = 25;
-    var bmod = 20;
+    let colorResult = '';
+    let textColor = '';
     {% for course in X.var %}
+    colorResult = getRandomColor();
+    textColor = lightOrDark(colorResult);
     for (let j = {{ course.start }}; j <= {{ course.end }}; j++) {
-      var strhasil = `${j}-{{ course.day }}-{{ course.room }}`;
-      console.log(strhasil);
-      var strlama = document.getElementById(strhasil).innerHTML;
-      document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ", "{{ course.course }}", "</b>");
-      var colored = red.toString().concat(",", green.toString(), ",", blue.toString());
-      document.getElementById(strhasil).style.background = "rgb(".concat(colored, ")");
-      document.getElementById(strhasil).className = "active";
-    }
-    red = red + rmod;
-    green = green - gmod;
-    blue = blue + bmod;
-    if (blue > 210) {
-      blue = 10;
-      bmod = bmod + 5;
-    }
-    if (green < 50) {
-      green = 220;
-      gmod = gmod + 5;
-    }
-    if (red > 200) {
-      red = 30;
-      rmod = rmod + 10;
-    }
+    let strhasil = `${j}-{{ course.day }}-{{ course.room }}`;
+    let strlama = document.getElementById(strhasil).innerHTML;
+    document.getElementById(strhasil).innerHTML = "<b>".concat(strlama, " ", "{{ course.course }}", "</b>");
+    document.getElementById(strhasil).style.background = colorResult;
+    document.getElementById(strhasil).style.color = textColor;
+    document.getElementById(strhasil).className = "active";
+  }
+  {% endfor %}
 
-    {% endfor %}
-
-    var num = document.getElementsByClassName('.active').length;
-    var open = document.getElementsByClassName('.open').length;
-    document.getElementById("persen").innerHTML = (num - 1) / (open + num - 1) * 100 + "%";
+  let num = document.getElementsByClassName('.active').length;
+  let open = document.getElementsByClassName('.open').length;
+  document.getElementById("persen").innerHTML = (num - 1) / (open + num - 1) * 100 + "%";
 
   });
 
