@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="has-navbar-fixed-top">
-
   <head>
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Good Scheduler for You">
+    <meta name="author" content="Bervianto Leo Pratama">
     <title>{% block title %}Scheduler OP{% endblock %}</title>
-    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://unpkg.com/buefy@0.8.8/dist/buefy.min.css">
     <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
     <style>
     .table__wrapper {
@@ -32,9 +31,9 @@
 
     {% include "footer.html" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
     <!-- Full bundle -->
-    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+    <script src="https://unpkg.com/buefy@0.8.8/dist/buefy.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
 
