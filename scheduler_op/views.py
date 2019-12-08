@@ -1,6 +1,8 @@
 import os.path
 import platform
+from datetime import date, timedelta
 
+from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -16,22 +18,16 @@ from .contributor import Contributor
 # render home page
 def list(request):
     # Handle file upload
-
-    documents = Document.objects.all()
-    maxID = 0
-    for document in documents:
-        if (document.id > maxID):
-            maxID = document.id
-
+    yesterday = timezone.now() - timezone.timedelta(days=1)
+    documents = Document.objects.filter(createdDate__gte=yesterday).order_by('-createdDate')[:10]
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            file_id = maxID + 1
-            newdoc = Document(file_id, docfile=request.FILES['docfile'])
+            newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
             methode = form.cleaned_data['radiobutton']
             # Redirect to the document list after POST
-            return HttpResponseRedirect('/load/?methode=' + methode + "&file_id=" + str(file_id))
+            return HttpResponseRedirect('/load/?methode=' + methode + "&file_id=" + str(newdoc.pk))
     else:
         form = UploadFileForm()  # A empty, unbound form
 
