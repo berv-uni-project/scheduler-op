@@ -11,6 +11,14 @@ This is scheduler or timetabling that implements 3 algorithm. This web app using
 
 3. Genetic Algorithm
 
+## Build Status
+
+| Docker | Django - Test |
+|:------:|:-------------:|
+| ![Django CI](https://github.com/berv-uni-project/scheduler-op/workflows/Django%20CI/badge.svg) | ![Docker](https://github.com/berv-uni-project/scheduler-op/workflows/Docker/badge.svg) |
+
+
+
 ## Program Demo
 
 Link : https://scheduler-op.herokuapp.com/
