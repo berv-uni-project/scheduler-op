@@ -1,4 +1,4 @@
-FROM python:3.11.0a6-alpine
+FROM python:3.11.0a7-alpine
 ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 RUN apk add --no-cache \
