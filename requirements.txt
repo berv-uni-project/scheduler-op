@@ -4,5 +4,5 @@ Django==5.2.7
 gunicorn==23.0.0
 psycopg2==2.9.10
 six==1.17.0
-virtualenv==20.34.0
+virtualenv==20.35.3
 whitenoise==6.11.0
