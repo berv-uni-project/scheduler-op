@@ -1,6 +1,6 @@
 dj-database-url==3.1.2
 dj-static==0.0.6
-Django==6.0.2
+Django==6.0.3
 gunicorn==25.1.0
 psycopg2==2.9.11
 six==1.17.0
