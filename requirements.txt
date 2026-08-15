@@ -4,6 +4,6 @@ Django==6.0.8
 gunicorn==26.0.0
 psycopg2==2.9.12
 six==1.17.0
-virtualenv==21.7.1
+virtualenv==21.7.4
 whitenoise==6.12.0
 setuptools==84.0.0
